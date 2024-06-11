@@ -1,0 +1,68 @@
+name: card_app
+description: "A new Flutter project."
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+  intl: ^0.18.1
+  riverpod_annotation: ^2.3.5
+  freezed_annotation: ^2.4.1
+  flutter_riverpod: ^2.5.1
+  flutter_screenutil: ^5.6.1
+  equatable: ^2.0.5
+  go_router: ^13.2.4
+  get_it: ^7.7.0
+  camera: ^0.11.0+1
+  # google_ml_kit: ^0.18.0
+  google_mlkit_text_recognition: ^0.13.0
+  image: ^4.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+  riverpod_generator: ^2.4.0
+  json_serializable: ^6.8.0
+  freezed: ^2.5.2
+  build_runner: ^2.4.9
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/svg/
+    - assets/data/
+    - assets/data/user/
+    - assets/icons/
+
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-Black.otf
+          weight: 900
+        - asset: assets/fonts/Pretendard-ExtraBold.otf
+          weight: 800
+        - asset: assets/fonts/Pretendard-Bold.otf
+          weight: 700
+        - asset: assets/fonts/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Pretendard-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Pretendard-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Pretendard-ExtraLight.otf
+          weight: 300
+        - asset: assets/fonts/Pretendard-Light.otf
+          weight: 200
+        - asset: assets/fonts/Pretendard-Thin.otf
+          weight: 100

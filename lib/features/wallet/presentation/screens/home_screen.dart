@@ -1,12 +1,13 @@
 import 'package:card_app/config/ui/app_dimensions.dart';
-import 'package:card_app/features/auth/domain/model/user_info_model.dart';
-import 'package:card_app/features/auth/presentation/provider/auth_provider.dart';
+import 'package:card_app/config/ui/theme_extension.dart';
+import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
+import 'package:card_app/features/wallet/domain/model/wallet_model.dart';
 import 'package:card_app/features/wallet/presentation/provider/wallet_provider.dart';
 import 'package:card_app/features/wallet/presentation/widget/home_top_widget.dart';
-import 'package:card_app/shared/widgets/bottom_navigation_bar/presentation/ss_bottom_navigation_bar.dart';
+import 'package:card_app/shared/extensions/build_context_extensions.dart';
 import 'package:card_app/shared/widgets/ss_layout.dart';
+import 'package:card_app/shared/widgets/ss_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,61 +17,100 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final double textSize = 30.h;
-    final double homeTopWidgetSize = 250.h;
-    final double bottomNavSize = (MediaQuery.sizeOf(context).width / 8 * 1.25);
+    WalletModel wallet = ref.watch(walletProvider);
 
-    final double homeGridSize = MediaQuery.sizeOf(context).height -
-        homeTopWidgetSize -
-        Dimensions.kVerticalSpaceSmall.height! * 2 -
-        textSize -
-        bottomNavSize;
-
-    final UserInfoModel myData = ref.watch(authProvider);
-    final List<UserInfoModel> wallet = ref.watch(walletProvider)!;
+    // ssPrint(SsHiveSetting.get(), 'home_screen');
 
     return SsLayout(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      statusBarColor: context.colorScheme.primary,
+      body: CustomScrollView(
+        slivers: [
+          //@ 화면 상단 위젯
+          const HomeTopWidget(),
+
+          SliverToBoxAdapter(child: Dimensions.ssVerticalSpaceSmall),
+
+          //!@ 최근 본 명함 위젯
+          HomeMainContents(
+            title: 'recent',
+            desc: 'EMPTY',
+            userInfoList: wallet.recent,
+            maxGrid: wallet.recent.length >= 4 ? 4 : wallet.recent.length,
+          ),
+
+          //!@ 전체 목록( 현재는 local 데이터만 가져옴 )
+          HomeMainContents(
+            title: 'favorite',
+            desc: 'EMPTY',
+            userInfoList: wallet.favorites,
+            maxGrid: wallet.favorites.length,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeMainContents extends StatelessWidget {
+  final String title;
+  final String desc;
+  final List<UserInfoEntity> userInfoList;
+  final int maxGrid;
+
+  const HomeMainContents({
+    required this.title,
+    required this.desc,
+    required this.userInfoList,
+    required this.maxGrid,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Column(
         children: [
-          HomeTopWidget(widgetSize: homeTopWidgetSize),
-          Dimensions.kVerticalSpaceSmall,
           Container(
-            padding: Dimensions.kPaddingHorizontalLarge,
-            height: textSize,
-            child: Text(
-              '최근 본 명함',
-              style: Theme.of(context).textTheme.headlineLarge,
+            alignment: Alignment.centerLeft,
+            padding: Dimensions.ssPaddingHorizontal,
+            child: SsText(
+              title: title,
+              style: context.theme.textTheme.headlineLarge!,
+              color: context.colorScheme.onBackground,
             ),
           ),
-          Dimensions.kVerticalSpaceSmall,
+          Dimensions.ssVerticalSpaceSmall,
+          if (userInfoList.isEmpty)
+            SsText(
+              title: desc,
+              style: context.textTheme.bodyMedium!,
+            ),
           Container(
-            padding: Dimensions.kPaddingHorizontalLarge,
-            height: homeGridSize,
+            padding: Dimensions.ssPaddingHorizontal,
+            height: 225.h * ((maxGrid + 1) ~/ 2),
             child: GridView.builder(
               padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 20.w,
-                mainAxisExtent: homeGridSize / 2 - 20.h,
+                mainAxisExtent: 450.h / 2 - 20.h,
                 mainAxisSpacing: 20.h,
               ),
-              itemCount: 4,
+              itemCount: maxGrid,
               itemBuilder: (BuildContext context, int index) {
-                return HomeCardWidget(userInfo: wallet[index]);
+                return HomeCardWidget(userInfo: userInfoList[index]);
               },
             ),
-          ),
+          )
         ],
       ),
-      bottomNavigationBar: const SsBottomNavigationBar(),
     );
   }
 }
 
 class HomeCardWidget extends StatelessWidget {
-  final UserInfoModel userInfo;
+  final UserInfoEntity userInfo;
 
   const HomeCardWidget({
     required this.userInfo,
@@ -82,12 +122,13 @@ class HomeCardWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            blurRadius: 5.0,
-            spreadRadius: 0.0,
-            offset: const Offset(7, 7),
-          ),
+          if (context.theme.brightness == Brightness.light)
+            BoxShadow(
+              color: context.colorScheme.secondary,
+              blurRadius: 10.0,
+              spreadRadius: 0.0,
+              offset: const Offset(5, 5),
+            ),
         ],
       ),
       child: Column(
@@ -99,33 +140,33 @@ class HomeCardWidget extends StatelessWidget {
                 topLeft: Radius.circular(12),
                 topRight: Radius.circular(12),
               ),
-              color: Theme.of(context).colorScheme.secondary,
+              color: context.theme.colorScheme.background,
             ),
             child: Column(
               children: [
-                Dimensions.kVerticalSpaceSmaller,
+                Dimensions.ssVerticalSpaceSmall,
                 CircleAvatar(
                   radius: 30.h,
                   foregroundImage: const NetworkImage(
                       'https://moviewalker.jp/api/resizeimage/person/10/f6/10f68aa2ac2da8f5a6c5d858b2c44faa.jpg?w=690'),
                 ),
-                Dimensions.kVerticalSpaceSmaller,
-                Text(
-                  userInfo.name!,
-                  style:
-                      Theme.of(context).textTheme.bodyLarge!.copyWith(color: Theme.of(context).colorScheme.onSecondary),
+                Dimensions.ssVerticalSpaceSmall,
+                SsText(
+                  title: userInfo.name,
+                  style: context.theme.textTheme.bodyLarge!,
+                  color: context.theme.colorScheme.onSecondary,
                 ),
-                Text(
-                  userInfo.company!,
-                  style:
-                      Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).colorScheme.onSecondary),
+                SsText(
+                  title: userInfo.company,
+                  style: context.theme.textTheme.bodySmall!,
+                  color: context.theme.colorScheme.onSecondary,
                 ),
-                Text(
-                  userInfo.team!,
-                  style:
-                      Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).colorScheme.onSecondary),
+                SsText(
+                  title: userInfo.team,
+                  style: context.theme.textTheme.bodySmall!,
+                  color: context.theme.colorScheme.onSecondary,
                 ),
-                Dimensions.kVerticalSpaceSmaller,
+                Dimensions.ssVerticalSpaceSmall,
               ],
             ),
           ),
@@ -149,52 +190,52 @@ class HomeCardWidget extends StatelessWidget {
                         width: 30.w,
                         height: 30.h,
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: context.theme.colorScheme.secondary,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
                           Icons.call,
                           size: 16.h,
-                          color: Theme.of(context).colorScheme.onSecondary,
+                          color: context.theme.colorScheme.onSecondary,
                         ),
                       ),
                       Container(
                         width: 30.w,
                         height: 30.h,
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: context.theme.colorScheme.secondary,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
                           Icons.message,
                           size: 16.h,
-                          color: Theme.of(context).colorScheme.onSecondary,
+                          color: context.theme.colorScheme.onSecondary,
                         ),
                       ),
                       Container(
                         width: 30.w,
                         height: 30.h,
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: context.theme.colorScheme.secondary,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
                           Icons.email,
                           size: 16.h,
-                          color: Theme.of(context).colorScheme.onSecondary,
+                          color: context.theme.colorScheme.onSecondary,
                         ),
                       ),
                       Container(
                         width: 30.w,
                         height: 30.h,
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: context.theme.colorScheme.secondary,
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
                           Icons.share,
                           size: 16.h,
-                          color: Theme.of(context).colorScheme.onSecondary,
+                          color: context.theme.colorScheme.onSecondary,
                         ),
                       ),
                     ],

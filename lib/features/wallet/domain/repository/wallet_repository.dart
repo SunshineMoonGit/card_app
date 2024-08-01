@@ -1,9 +1,12 @@
-import 'package:card_app/features/auth/domain/model/user_info_model.dart';
-import 'package:card_app/features/wallet/domain/model/wallet_item_model.dart';
+import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
+import 'package:card_app/shared/class/result/result.dart';
 
 abstract class WalletRepository {
-  // 유저 정보 리스트 가져오기 - firebase
-  Future<List<UserInfoModel>> getWallet(List<int>? following);
+  // 유저 정보 리스트 가져오기 - network
+  Future<List<UserInfoEntity>> getWalletNetWork(List<int>? following);
+  // 유저 정보 리스트 가져오기 - local db
+  Future<Result<List<UserInfoEntity>>> getLocal(List<String> uidFollowings);
 
-  // page 및 즐겨찾기 정보 가져오기 - local
+  Future<Result> addLocal(UserInfoEntity newData);
+  Future<Result<List<UserInfoEntity>>> deleteLocal(String uid, List<UserInfoEntity> data);
 }

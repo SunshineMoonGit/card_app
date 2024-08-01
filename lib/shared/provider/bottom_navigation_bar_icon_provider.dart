@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'bottom_navigation_bar_icon_provider.g.dart';
 
 @riverpod
-List<BottomNavigationBarIconModel> bottomNavigationBarIcon(Ref ref) {
+List<BottomNavigationBarIconModel> bottomNavigationBarIcon(Ref ref, BuildContext context) {
   List<BottomNavigationBarIconModel> items = [
     BottomNavigationBarIconModel(
       icon: Icons.home_outlined,

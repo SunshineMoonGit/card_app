@@ -1,3 +1,4 @@
+import 'package:card_app/shared/provider/text_controller_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'page_index_provider.g.dart';

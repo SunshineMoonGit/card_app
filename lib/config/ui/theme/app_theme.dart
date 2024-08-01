@@ -12,12 +12,18 @@ part 'text_theme.dart';
 class AppTheme {
   static final lightTheme = ThemeData(
     useMaterial3: true,
-    brightness: Brightness.light,
+    brightness: _AppColorScheme._lightColorScheme.brightness,
     colorScheme: _AppColorScheme._lightColorScheme,
     textTheme: _TextTheme._textLightTheme,
     fontFamily: 'Pretendard',
     appBarTheme: _AppBarTheme._appBarLightTheme,
-    scaffoldBackgroundColor: _AppColorScheme._lightColorScheme.background,
+    // scaffoldBackgroundColor: _AppColorScheme._lightColorScheme.background,
+    iconTheme: IconThemeData(color: _AppColorScheme._lightColorScheme.onPrimary),
+
+    // inputDecorationTheme: const InputDecorationTheme(
+    //   border: OutlineInputBorder(),
+    //   enabledBorder: OutlineInputBorder(),
+    // ),
   );
 
   static final darkTheme = ThemeData(
@@ -27,6 +33,9 @@ class AppTheme {
     textTheme: _TextTheme._textDarkTheme,
     fontFamily: 'Pretendard',
     appBarTheme: _AppBarTheme._appBarDarkTheme,
-    scaffoldBackgroundColor: _AppColorScheme._lightColorScheme.background,
+    scaffoldBackgroundColor: _AppColorScheme._darkColorScheme.background,
+    inputDecorationTheme: const InputDecorationTheme(
+      border: InputBorder.none,
+    ),
   );
 }

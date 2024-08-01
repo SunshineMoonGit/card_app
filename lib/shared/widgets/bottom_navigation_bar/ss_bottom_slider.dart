@@ -1,8 +1,6 @@
 import 'dart:ui';
 
-import 'package:card_app/features/auth/presentation/screens/user_info_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'controller.dart';
 
 /// A backdrop widget that displaying contextual and actionable content. =]
@@ -45,25 +43,25 @@ class SsBottomSlider extends StatefulWidget {
   final double? panelWidth;
 
   /// Set this value to create a border radius over Panel.
-  /// When panelBorderRadiusBegin is diffrent from panelBorderRadiusEnd
+  /// When panelBorderRadiusBegin is different from panelBorderRadiusEnd
   /// and the panel is slide up, this create an animation border over panel
   /// By default is 0.0
   final double panelBorderRadiusBegin;
 
   /// Set this value to create a border radius over Panel.
-  /// When panelBorderRadiusBegin is diffrent from panelBorderRadiusEnd
+  /// When panelBorderRadiusBegin is different from panelBorderRadiusEnd
   /// and the panel is slide up, this create an animation border over panel
   /// By default is 0.0
   final double panelBorderRadiusEnd;
 
   /// Set this value to create a border radius over Body.
-  /// When bodyBorderRadiusBegin is diffrent from bodyBorderRadiusEnd
+  /// When bodyBorderRadiusBegin is different from bodyBorderRadiusEnd
   /// and the panel is slide up, this create an animation border over body
   /// By default is 0.0
   final double bodyBorderRadiusBegin;
 
   /// Set this value to create a border radius over Body.
-  /// When bodyBorderRadiusBegin is diffrent from bodyBorderRadiusEnd
+  /// When bodyBorderRadiusBegin is different from bodyBorderRadiusEnd
   /// and the panel is slide up, this create an animation border over body.
   /// By default is 0.0
   final double bodyBorderRadiusEnd;
@@ -80,12 +78,12 @@ class SsBottomSlider extends StatefulWidget {
   /// by default is 60.0
   final double footerHeight;
 
-  /// This is the value that set the appbar height.
+  /// This is the value that set the appBar height.
   /// by default is 56.0
   final double appBarHeight;
 
   /// This is the value that defines opacity
-  /// overlay effect bethen body and panel.
+  /// overlay effect be then body and panel.
   final double overlayOpacity;
 
   /// This is the value that creates an image filter
@@ -120,7 +118,7 @@ class SsBottomSlider extends StatefulWidget {
   /// By default is true
   final bool hidePanelHeader;
 
-  /// This is the value that defines if you want to enable paralax effect.
+  /// This is the value that defines if you want to enable parallax effect.
   /// By default is false
   final bool parallax;
 
@@ -223,6 +221,7 @@ class SsBottomSlider extends StatefulWidget {
   }
 
   @override
+  // ignore: library_private_types_in_public_api
   _SsBottomSliderState createState() => _SsBottomSliderState();
 }
 
@@ -358,7 +357,7 @@ class _SsBottomSliderState extends State<SsBottomSlider> with TickerProviderStat
     }
   }
 
-  // Get Body Animation [Paralax]
+  // Get Body Animation [parallax]
   Animation<Offset> _getAnimationOffSet({required double minSize, required double maxSize}) {
     final closedPercentage = (widget.panelMaxSize - minSize) / widget.panelMaxSize;
 
@@ -374,7 +373,7 @@ class _SsBottomSliderState extends State<SsBottomSlider> with TickerProviderStat
     if (!widget.hideFooter && widget.footer != null) {
       size += widget.footerHeight;
     }
-    /* If appbar is visible*/
+    /* If appBar is visible*/
     if (!widget.hideAppBar && widget.appBar != null) {
       size += widget.appBarHeight;
     }
@@ -382,7 +381,7 @@ class _SsBottomSliderState extends State<SsBottomSlider> with TickerProviderStat
     return size;
   }
 
-  /* Get panel maxsize location*/
+  /* Get panel maxSize location*/
   double _getPanelLocation() {
     var location = widget.panelMaxSize;
     if (widget.appBar != null && !widget.hideAppBar) {
@@ -407,12 +406,12 @@ class _SsBottomSliderState extends State<SsBottomSlider> with TickerProviderStat
   double _getBodyLocation() {
     var location = 0.0;
 
-    /* if appbar */
+    /* if appBar */
     if (widget.appBar != null) {
       location += widget.appBarHeight;
     }
 
-    /* if paralax*/
+    /* if parallax*/
     if (widget.parallax) {
       location += _ac.value * (widget.panelMaxSize - widget.panelMinSize) * -widget.parallaxOffset;
     }
@@ -421,7 +420,7 @@ class _SsBottomSliderState extends State<SsBottomSlider> with TickerProviderStat
 
   double _getBodyHeight() {
     var size = widget.panelMinSize;
-    /* If appbar is visible*/
+    /* If appBar is visible*/
     if (widget.appBar != null) size += widget.appBarHeight;
 
     /* if no panelMinSize value*/

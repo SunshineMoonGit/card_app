@@ -2,48 +2,76 @@ part of 'app_theme.dart';
 
 @immutable
 class _AppColorScheme {
+  // 라이트 모드 색상 구성표
   static const _lightColorScheme = ColorScheme(
-    // 밝기
     brightness: Brightness.light,
-    // 기본 색상
     primary: _AppColor.primaryColor,
-    // 기본 색상 위의 텍스트 색상
-    onPrimary: _AppColor.white,
-    // 강조 색상
-    secondary: _AppColor.secondaryColor,
-    // 강조 색상 위의 텍스트 색상
-    onSecondary: _AppColor.white,
-    // 세 번째 컨테이너 색상
-    tertiaryContainer: _AppColor.accentColor,
-    // 세 번째 컨테이너 위의 텍스트 색상
-    onTertiaryContainer: _AppColor.black,
-    // 오류 색상
-    error: _AppColor.red,
-    // 오류 색상 위의 텍스트 색상
-    onError: _AppColor.white,
-    // 배경 색상
-    background: _AppColor.white,
-    // 배경 위의 텍스트 색상
-    onBackground: _AppColor.textColor,
-    // 서페이스 색상
-    surface: _AppColor.white,
-    // 서페이스 위의 텍스트 색상
-    onSurface: _AppColor.black,
+    onPrimaryContainer: _AppColor.hightLightPrimaryColor,
+    onPrimary: _AppColor.light_0,
+    secondary: _AppColor.light_2,
+    onSecondary: _AppColor.light_9,
+    background: _AppColor.light_1,
+    onBackground: _AppColor.light_10,
+    surface: _AppColor.light_0,
+    onSurface: _AppColor.light_11,
+    tertiary: _AppColor.light_4,
+    onTertiary: _AppColor.light_7,
+    //
+    error: _AppColor.light_8,
+    onError: _AppColor.light_0,
+    shadow: _AppColor.light_4,
   );
 
+// 다크 모드 색상 구성표
   static const _darkColorScheme = ColorScheme(
     brightness: Brightness.dark,
-    primary: _AppColor.primaryColor, // Primary color for Youtube
-    onPrimary: _AppColor.black,
-    secondary: _AppColor.white,
-    onSecondary: _AppColor.black,
-    tertiaryContainer: _AppColor.accentColorDark,
-    onTertiaryContainer: _AppColor.white,
-    error: _AppColor.red,
-    onError: _AppColor.white,
-    background: _AppColor.accentColorDark,
-    onBackground: _AppColor.white,
-    surface: _AppColor.accentColorDark,
-    onSurface: _AppColor.white,
+    primary: _AppColor.primaryColor,
+    onPrimaryContainer: _AppColor.hightLightPrimaryColor,
+    onPrimary: _AppColor.light_0,
+    secondary: _AppColor.light_8,
+    onSecondary: _AppColor.light_3,
+    background: _AppColor.light_10,
+    onBackground: _AppColor.light_1,
+    surface: _AppColor.light_11,
+    onSurface: _AppColor.light_0,
+    tertiary: _AppColor.light_7,
+    onTertiary: _AppColor.light_4,
+    //
+    error: _AppColor.light_6,
+    onError: _AppColor.light_0,
+    shadow: _AppColor.light_9,
   );
+  // static const _lightColorScheme = ColorScheme(
+  //   brightness: Brightness.light,
+  //   primary: _AppColor.primaryColor,
+  //   onPrimary: _AppColor.onPrimary,
+  //   secondary: _AppColor.secondaryColor,
+  //   onSecondary: _AppColor.onSecondary,
+  //   background: _AppColor.background,
+  //   onBackground: _AppColor.onBackground,
+  //   surface: _AppColor.surface,
+  //   onSurface: _AppColor.onSurface,
+  //   error: _AppColor.error,
+  //   onError: _AppColor.onError,
+  //   tertiary: _AppColor.secondaryColor, // Optional if you have a tertiary color
+  //   onTertiary: _AppColor.onSecondary, // Optional if you have a tertiary color
+  //   shadow: _AppColor.secondaryColor,
+  // );
+
+  // static const _darkColorScheme = ColorScheme(
+  //   brightness: Brightness.dark,
+  //   primary: _AppColor.primaryColorDark,
+  //   onPrimary: _AppColor.onPrimaryDark,
+  //   secondary: _AppColor.secondaryColorDark,
+  //   onSecondary: _AppColor.onSecondaryDark,
+  //   background: _AppColor.backgroundDark,
+  //   onBackground: _AppColor.onBackgroundDark,
+  //   surface: _AppColor.surfaceDark,
+  //   onSurface: _AppColor.onSurfaceDark,
+  //   error: _AppColor.errorDark,
+  //   onError: _AppColor.onErrorDark,
+  //   tertiary: _AppColor.secondaryColorDark, // Optional if you have a tertiary color
+  //   onTertiary: _AppColor.onSecondaryDark, // Optional if you have a tertiary color
+  //   shadow: _AppColor.onBackgroundDark,
+  // );
 }

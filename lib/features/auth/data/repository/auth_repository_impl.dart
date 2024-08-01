@@ -1,16 +1,55 @@
-import 'package:card_app/features/auth/data/data_source/auth_data_source.dart';
-import 'package:card_app/features/auth/domain/model/user_info_model.dart';
+import 'package:card_app/config/app/app_enum.dart';
+import 'package:card_app/config/mapper/user_info_mapper.dart';
+import 'package:card_app/features/auth/data/model/user_info_model.dart';
+import 'package:card_app/features/auth/data/source/auth/local/auth_data_source_local.dart';
+import 'package:card_app/features/auth/data/source/auth/network/auth_data_source_network.dart';
+import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
 import 'package:card_app/features/auth/domain/repository/auth_repository.dart';
+import 'package:card_app/features/settings/domain/model/settings_model.dart';
+import 'package:card_app/shared/class/result/result.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
-  final AuthDataSource dataSource;
+  final AuthDataSourceLocal dataSourceLocal;
+  final AuthDataSourceNetwork dataSourceNetwork;
 
   AuthRepositoryImpl({
-    required this.dataSource,
+    required this.dataSourceLocal,
+    required this.dataSourceNetwork,
   });
+  @override
+  Future<void> signUpWithEmail(String email, String pw, SettingsModel settings) async {
+    return await dataSourceNetwork.signUpWithEmail(email, pw, settings);
+  }
 
   @override
-  Future<UserInfoModel> getMyData() {
-    return dataSource.getMyData();
+  Future<void> signInWithEmail(String email, String pw, SettingsModel settings) async {
+    return await dataSourceNetwork.signInWithEmail(email, pw, settings);
+  }
+
+  @override
+  Future<AuthState> check() {
+    return dataSourceLocal.check();
+  }
+
+  @override
+  Future<Result<UserInfoEntity>> getData(String uid) async {
+    Result<UserInfoModel> result = await dataSourceNetwork.getData(uid);
+
+    return result.when(
+      success: (value) => Result.success(value.toEntity()),
+      failure: (message) => Result.failure(message),
+    );
+  }
+
+  @override
+  Future<List<UserInfoEntity>> getDataList(List<String> uids) async {
+    List<UserInfoModel> result = await dataSourceLocal.getDataList(uids);
+
+    return result.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<void> updateBasicData(String uid, UserInfoEntity data) {
+    return dataSourceNetwork.updateBasicData(uid, UserInfoMapper.toModel(data));
   }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "318188622133",
+    "project_id": "viz-card-app",
+    "storage_bucket": "viz-card-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318188622133:android:6d1d7c4637828b2a71bc7c",
+        "android_client_info": {
+          "package_name": "com.sunshinemoongit.card_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAoAmgJ3Bv8jM_uZvTppX7-l1necz42Tw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

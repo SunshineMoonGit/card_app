@@ -1,7 +1,6 @@
-
 import 'package:card_app/config/app/app_string.dart';
 import 'package:card_app/config/ui/theme_extension.dart';
-import 'package:card_app/shared/provider/app_method.dart';
+import 'package:card_app/shared/provider/methods/app_method.dart';
 import 'package:card_app/shared/widgets/ss_layout.dart';
 import 'package:card_app/shared/widgets/ss_text.dart';
 import 'package:flutter/material.dart';
@@ -33,19 +32,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // AppMethod(ref).init();
-    // ref.listen<AsyncValue<void>>(
-    //   appInitializationProvider,
-    //   (_, state) => state.whenOrNull(
-    //     data: (_) => WidgetsBinding.instance.addPostFrameCallback((_) {
-    //       print('dd');
-    //     }),
-    //     error: (err, stack) {
-    //       print('ss');
-    //     },
-    //   ),
-    // );
-
     return SsLayout(
       body: Center(
         child: SsText(

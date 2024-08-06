@@ -12,6 +12,8 @@ class SsAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color statusBarColor;
   final List<Widget>? actions;
   final bool? centerTitle;
+  final void Function()? leading;
+  final bool leadingToggle;
 
   const SsAppBar({
     super.key,
@@ -19,6 +21,8 @@ class SsAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     required this.statusBarColor,
     this.centerTitle = false,
+    this.leadingToggle = false,
+    this.leading,
   });
 
   @override
@@ -30,6 +34,12 @@ class SsAppBar extends StatelessWidget implements PreferredSizeWidget {
         navBarColor: context.colorScheme.background,
         statusBarColor: statusBarColor,
       ),
+      leading: leadingToggle
+          ? GestureDetector(
+              onTap: leading,
+              child: const Icon(Icons.arrow_back_ios),
+            )
+          : null,
       toolbarHeight: null,
       elevation: 0,
       scrolledUnderElevation: 0,

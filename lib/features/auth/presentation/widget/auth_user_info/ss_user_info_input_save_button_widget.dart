@@ -1,10 +1,10 @@
 import 'package:card_app/features/auth/presentation/widget/ss_save_button_widget.dart';
 import 'package:card_app/shared/class/controller_manager.dart';
-import 'package:card_app/shared/functions/save/form_save.dart';
+import 'package:card_app/shared/provider/methods/app_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SsUserInfoInputSaveButtonWidget extends ConsumerWidget {
+class SsUserInfoInputSaveButtonWidget<T extends ControllerManager> extends ConsumerWidget {
   const SsUserInfoInputSaveButtonWidget({
     super.key,
     required this.controllers,
@@ -12,7 +12,7 @@ class SsUserInfoInputSaveButtonWidget extends ConsumerWidget {
     required this.formKey,
   });
 
-  final ControllerManager controllers;
+  final NewCardController controllers;
   final bool isSignUp;
   final GlobalKey<FormState> formKey;
 
@@ -20,8 +20,18 @@ class SsUserInfoInputSaveButtonWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return SliverToBoxAdapter(
       child: SsSaveButtonWidget(
-        onTap: () {
-          // controllers.save();
+        onTap: () async {
+          if (isSignUp) {
+            await AppMethod(ref).auth.update(controllers);
+          } else {
+            await AppMethod(ref).wallet.addFollowing(controllers);
+          }
+        },
+      ),
+    );
+  }
+}
+ // controllers.save();
           // Save.textForms(
           //   controllers: controllers,
           //   isSignUp: isSignUp,
@@ -29,8 +39,3 @@ class SsUserInfoInputSaveButtonWidget extends ConsumerWidget {
           //   context: context,
           //   formKey: formKey,
           // );
-        },
-      ),
-    );
-  }
-}

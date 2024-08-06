@@ -1,5 +1,5 @@
 import 'package:card_app/features/auth/data/model/user_info_model.dart';
-import 'package:card_app/shared/class/result/result.dart';
+import 'package:card_app/shared/class/result_model/result.dart';
 
 abstract class WalletDataSourceLocal {
   Future<Result<List<UserInfoModel>>> getLocal(List<String> uidFollowings);

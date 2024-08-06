@@ -73,13 +73,6 @@ class HomeTopWidgetDelegate extends SliverPersistentHeaderDelegate {
                     );
                   },
                 ),
-                //   builder: (context) {
-                //     return GestureDetector(
-                //       onTap: () {},
-                //       child: const Icon(Icons.share),
-                //     );
-                //   }
-                // ),
                 Dimensions.ssHorizontalSpaceSmall,
                 Consumer(
                   builder: (context, ref, child) {

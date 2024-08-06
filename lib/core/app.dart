@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:card_app/config/ui/theme/app_theme.dart';
 import 'package:card_app/config/router/router.dart';
-import 'package:card_app/features/settings/presentation/provider/settings_provider.dart';
+import 'package:card_app/config/ui/theme/app_theme.dart';
+import 'package:card_app/features/settings/presentation/provider/custom_setting_provider.dart';
 import 'package:card_app/features/settings/presentation/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +16,7 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool lightMode = ref.watch(themeProvider);
-    final String? language = ref.watch(settingsProvider).language;
+    final String? language = ref.watch(customSettingProvider).language;
 
     return ScreenUtilInit(
       designSize: const Size(375, 812),

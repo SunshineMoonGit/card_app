@@ -9,6 +9,8 @@ part 'controller_manager.freezed.dart';
 class ControllerManager with _$ControllerManager {
   const ControllerManager._();
 
+  const factory ControllerManager.empty() = EmptyController;
+
   const factory ControllerManager.signIn({
     required TextEditingController loginEmailController,
     required TextEditingController loginPwController,
@@ -30,8 +32,9 @@ class ControllerManager with _$ControllerManager {
     required TextEditingController faxController,
   }) = NewCardController;
 
-  String get appBarTitle {
+  String get title {
     return map(
+      empty: (_) => '',
       signIn: (_) => AppString.signIn,
       signUp: (_) => AppString.signUp,
       newCard: (_) => AppString.newCardAdd,
@@ -40,6 +43,7 @@ class ControllerManager with _$ControllerManager {
 
   void dispose() {
     map(
+      empty: (value) {},
       signIn: (value) {
         value.loginEmailController.dispose();
         value.loginPwController.dispose();

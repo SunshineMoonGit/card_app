@@ -40,7 +40,7 @@ class _RedirectNotifier extends ChangeNotifier {
       authStateProvider,
       (previous, next) {
         if (previous != next) {
-          ssPrint("Redirect", 'router');
+          // ssPrint("Redirect", 'router');
           // _currentAuthState = next;
           notifyListeners();
         }
@@ -48,23 +48,24 @@ class _RedirectNotifier extends ChangeNotifier {
     );
   }
 
+  List<String> urls = [AuthSelectScreen.route, AuthWithEmailScreen.route];
+
   Future<String?> _redirectLogic(_, GoRouterState state) async {
     final AuthState authState = await ref.read(authStateProvider);
-
-    if (state.uri.toString() == SplashScreen.route) {
-      if (authState == AuthState.logIn) {
-        ssPrint('login', 'router');
-        return HomePage.route;
-      } else if (authState == AuthState.logOut) {
-        ssPrint('logOut', 'router');
-        return AuthSelectScreen.route;
+    ssPrint('Current path: ${state.uri.path}', 'Current authState: $authState', false);
+    // print(');
+    if (state.uri.path == SplashScreen.route) {
+      switch (authState) {
+        case AuthState.authenticated:
+          return HomePage.route;
+        case AuthState.unauthenticated:
+          return AuthSelectScreen.route;
+        case AuthState.authenticatedButIncomplete:
+          return AuthUserInfoInputScreen.route(isSignUp: true);
+        default:
+          return null; // initial, loading, error 등의 상태에서는 리다이렉트하지 않음
       }
     }
-
-    if (authState == AuthState.logOut && state.uri.toString() != AuthSelectScreen.route) {
-      return SplashScreen.route;
-    }
-
     return null;
   }
 
@@ -75,18 +76,11 @@ class _RedirectNotifier extends ChangeNotifier {
                 SplashScreen(settingUpdate: state.extra == null ? false : state.extra as bool)),
         GoRoute(path: AuthSelectScreen.route, builder: (context, state) => const AuthSelectScreen()),
         GoRoute(
-            path: AuthWithEmailScreen.route,
-            builder: (context, state) {
-              if (state.extra as bool) {
-                return const AuthWithEmailScreen<SignUpController>();
-              } else {
-                return const AuthWithEmailScreen<SignInController>();
-              }
-            }
-            // AuthWithEmailScreen<SignInController>(
-            //   isSignUp: state.extra as bool,
-            // ),
-            ),
+          path: AuthWithEmailScreen.route,
+          builder: (context, state) {
+            return AuthWithEmailScreen(isSignUp: state.extra as bool);
+          },
+        ),
         // HomePage
         GoRoute(path: HomePage.route, builder: (context, state) => const HomePage()),
 
@@ -100,13 +94,10 @@ class _RedirectNotifier extends ChangeNotifier {
         ),
         // Add Wallet
         GoRoute(
-          path: AuthUserInfoInputScreen.route,
+          path: AuthUserInfoInputScreen.basePath,
           builder: (context, state) {
-            if (state.extra as bool) {
-              return const AuthUserInfoInputScreen<SignUpController>();
-            } else {
-              return const AuthUserInfoInputScreen<NewCardController>();
-            }
+            final isSignUp = state.uri.queryParameters['isSignUp'] == 'true';
+            return AuthUserInfoInputScreen(isSignUp: isSignUp);
           },
         ),
 

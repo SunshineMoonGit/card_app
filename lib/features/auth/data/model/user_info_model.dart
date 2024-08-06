@@ -2,8 +2,8 @@ import 'package:card_app/config/app/app_enum.dart';
 import 'package:card_app/config/app/app_string.dart';
 import 'package:card_app/config/mapper/user_info_mapper.dart';
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
-import 'package:card_app/shared/class/controller_manager.dart';
 import 'package:card_app/shared/class/ss_external_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_info_model.freezed.dart';
@@ -12,6 +12,7 @@ part 'user_info_model.g.dart';
 @freezed
 abstract class UserInfoModel with _$UserInfoModel {
   const UserInfoModel._();
+
   factory UserInfoModel({
     @Default('') String uid,
     @Default(UserType.normal) UserType userType,
@@ -33,6 +34,8 @@ abstract class UserInfoModel with _$UserInfoModel {
   factory UserInfoModel.fromJson(Map<String, dynamic> json) => _$UserInfoModelFromJson(json);
 
   factory UserInfoModel.fromEntity(UserInfoEntity entity) => UserInfoMapper.toModel(entity);
+
+  factory UserInfoModel.fromUser(User user) => UserInfoMapper.fromUser(user);
 
   UserInfoEntity toEntity() => UserInfoMapper.toEntity(this);
 }

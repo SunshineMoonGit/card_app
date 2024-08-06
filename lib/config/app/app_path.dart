@@ -1,6 +1,14 @@
 class AppPath {
-  static const localMy = 'assets/data/';
-  static const localSvg = 'assets/svg/';
+  static const assetMy = 'assets/data/';
+  static const assetSvg = 'assets/svg/';
+
+  static const String followings = 'followings';
+  static const String local = 'local';
+  static const String auth = 'auth';
+  static const String setting = 'setting';
+  static const String recent = 'recent';
+  static const localCustom = 'custom';
+  static const localKey = 'key';
 
   static const networkPath = 'users';
 

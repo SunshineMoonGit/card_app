@@ -4,7 +4,7 @@ import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
 import 'package:card_app/features/auth/presentation/provider/auth_info_provider.dart';
 import 'package:card_app/features/wallet/domain/model/wallet_model.dart';
 import 'package:card_app/features/wallet/domain/use_case/wallet_local_use_case.dart';
-import 'package:card_app/shared/class/result/result.dart';
+import 'package:card_app/shared/class/result_model/result.dart';
 import 'package:card_app/shared/functions/ss_print.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,7 +25,7 @@ class WalletProviderNotifier extends StateNotifier<WalletModel> {
 
   // state value setting
   Future<void> update(UserType userType) async {
-    ssPrint('init', 'wallet_provider');
+    // ssPrint('init', 'wallet_provider');
     final Result<List<UserInfoEntity>> result = await _getLocal(userType);
 
     result.when(
@@ -67,7 +67,7 @@ class WalletProviderNotifier extends StateNotifier<WalletModel> {
 
   Future<Result<List<UserInfoEntity>>> _getLocal(UserType userType) async {
     final UserInfoEntity authInfo = ref.read(authInfoProvider);
-    ssPrint('getLocal', 'wallet_provider');
+    // ssPrint('getLocal', 'wallet_provider');
     // 일반 유저
     if (userType == UserType.normal) {
       return await walletLocalUseCase.get(authInfo.followings);

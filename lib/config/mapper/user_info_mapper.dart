@@ -1,7 +1,15 @@
+import 'package:card_app/config/app/app_enum.dart';
 import 'package:card_app/features/auth/data/model/user_info_model.dart';
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserInfoMapper {
+  static UserInfoModel fromUser(User user) {
+    return UserInfoModel(
+      uid: user.uid,
+    );
+  }
+
   static UserInfoEntity toEntity(UserInfoModel model) {
     return UserInfoEntity(
       uid: model.uid,

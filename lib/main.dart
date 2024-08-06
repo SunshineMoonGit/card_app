@@ -19,6 +19,7 @@ Future<void> main() async {
   );
 
   cameras = await availableCameras();
+
   await Hive.initFlutter();
   await Hive.openBox(AppString.auth);
   await Hive.openBox(AppString.followings);
@@ -28,11 +29,10 @@ Future<void> main() async {
   provideDataSources();
   provideRepositories();
   provideUseCases();
+
   runApp(
     ProviderScope(
-      observers: [
-        Observers(),
-      ],
+      observers: [Observers()],
       child: const App(),
     ),
   );

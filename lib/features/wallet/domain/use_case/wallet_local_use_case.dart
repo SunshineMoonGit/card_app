@@ -1,6 +1,6 @@
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
 import 'package:card_app/features/wallet/domain/repository/wallet_repository.dart';
-import 'package:card_app/shared/class/result/result.dart';
+import 'package:card_app/shared/class/result_model/result.dart';
 
 class WalletLocalUseCase {
   final WalletRepository repository;

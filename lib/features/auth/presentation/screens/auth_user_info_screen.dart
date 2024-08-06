@@ -4,7 +4,7 @@ import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
 import 'package:card_app/features/auth/presentation/widget/shared/ss_user_info_basic_widget.dart';
 import 'package:card_app/features/auth/presentation/widget/shared/ss_user_info_external_widget.dart';
 import 'package:card_app/features/auth/presentation/widget/shared/ss_user_info_card_widget/ss_user_info_card_widget.dart';
-import 'package:card_app/shared/provider/app_method.dart';
+import 'package:card_app/shared/provider/methods/app_method.dart';
 import 'package:card_app/shared/widgets/ss_button_widget.dart';
 import 'package:card_app/shared/widgets/ss_layout.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +52,7 @@ class AuthUserInfoScreen extends StatelessWidget {
             title: '삭제',
             backgroundColor: Colors.red,
             onTap: () {
-              AppMethod(ref).deleteFollowing(uid);
+              AppMethod(ref).wallet.deleteFollowing(uid);
               context.pop();
             },
           );

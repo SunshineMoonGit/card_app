@@ -29,7 +29,9 @@ class TabBody extends ConsumerWidget {
 
     if (pageIndex == 0) return const HomeScreen();
     if (pageIndex == 1) return const WalletScreen();
-    if (pageIndex == 2) return const AuthUserInfoInputScreen<NewCardController>();
+    if (pageIndex == 2) {
+      return const AuthUserInfoInputScreen(isSignUp: false);
+    }
     if (pageIndex == 3) return const AuthProfileScreen();
 
     return Container();

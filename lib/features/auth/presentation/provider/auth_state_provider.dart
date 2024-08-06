@@ -5,20 +5,35 @@ import 'package:card_app/shared/functions/ss_print.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final authStateProvider = StateNotifierProvider<AuthStateProviderNotifier, AuthState>((ref) {
-  final UserInfoEntity authInfo = ref.watch(authInfoProvider);
-  return AuthStateProviderNotifier(authInfo);
+  return AuthStateProviderNotifier(ref);
 });
 
 class AuthStateProviderNotifier extends StateNotifier<AuthState> {
-  final UserInfoEntity authInfo;
+  final Ref ref;
 
-  AuthStateProviderNotifier(this.authInfo) : super(AuthState.check);
+  AuthStateProviderNotifier(this.ref) : super(AuthState.initial);
 
   Future<void> check() async {
-    ssPrint("check", 'auth_state_provider');
+    final UserInfoEntity authInfo = ref.read(authInfoProvider);
+    // ssPrint("check", 'auth_state_provider');
 
-    state = AuthState.logIn;
+    if (authInfo.uid == '') {
+      state = AuthState.unauthenticated;
+      return;
+    }
 
-    ssPrint(state, 'auth_state_provider');
+    if (authInfo.uid != '') {
+      if (authInfo.name == '') {
+        state = AuthState.authenticatedButIncomplete;
+      } else {
+        state = AuthState.authenticated;
+      }
+    }
+
+    // ssPrint(state, 'auth_state_provider');
+  }
+
+  void change(AuthState authState) {
+    state = authState;
   }
 }

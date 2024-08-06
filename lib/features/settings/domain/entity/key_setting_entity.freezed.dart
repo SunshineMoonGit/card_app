@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'settings_model.dart';
+part of 'key_setting_entity.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,17 +14,14 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-SettingsModel _$SettingsModelFromJson(Map<String, dynamic> json) {
-  return _SettingsModel.fromJson(json);
+KeySettingEntity _$KeySettingEntityFromJson(Map<String, dynamic> json) {
+  return _KeySettingEntity.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SettingsModel {
+mixin _$KeySettingEntity {
   String? get uid => throw _privateConstructorUsedError;
   String get updateTime => throw _privateConstructorUsedError;
-  bool get darkMode => throw _privateConstructorUsedError;
-  String? get language => throw _privateConstructorUsedError;
-  bool get notificationsEnabled => throw _privateConstructorUsedError;
   @SsListStringConverter()
   List<String> get favorites => throw _privateConstructorUsedError;
   @SsListStringConverter()
@@ -32,30 +29,27 @@ mixin _$SettingsModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SettingsModelCopyWith<SettingsModel> get copyWith =>
+  $KeySettingEntityCopyWith<KeySettingEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SettingsModelCopyWith<$Res> {
-  factory $SettingsModelCopyWith(
-          SettingsModel value, $Res Function(SettingsModel) then) =
-      _$SettingsModelCopyWithImpl<$Res, SettingsModel>;
+abstract class $KeySettingEntityCopyWith<$Res> {
+  factory $KeySettingEntityCopyWith(
+          KeySettingEntity value, $Res Function(KeySettingEntity) then) =
+      _$KeySettingEntityCopyWithImpl<$Res, KeySettingEntity>;
   @useResult
   $Res call(
       {String? uid,
       String updateTime,
-      bool darkMode,
-      String? language,
-      bool notificationsEnabled,
       @SsListStringConverter() List<String> favorites,
       @SsListStringConverter() List<String> recent});
 }
 
 /// @nodoc
-class _$SettingsModelCopyWithImpl<$Res, $Val extends SettingsModel>
-    implements $SettingsModelCopyWith<$Res> {
-  _$SettingsModelCopyWithImpl(this._value, this._then);
+class _$KeySettingEntityCopyWithImpl<$Res, $Val extends KeySettingEntity>
+    implements $KeySettingEntityCopyWith<$Res> {
+  _$KeySettingEntityCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -67,9 +61,6 @@ class _$SettingsModelCopyWithImpl<$Res, $Val extends SettingsModel>
   $Res call({
     Object? uid = freezed,
     Object? updateTime = null,
-    Object? darkMode = null,
-    Object? language = freezed,
-    Object? notificationsEnabled = null,
     Object? favorites = null,
     Object? recent = null,
   }) {
@@ -82,18 +73,6 @@ class _$SettingsModelCopyWithImpl<$Res, $Val extends SettingsModel>
           ? _value.updateTime
           : updateTime // ignore: cast_nullable_to_non_nullable
               as String,
-      darkMode: null == darkMode
-          ? _value.darkMode
-          : darkMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-      language: freezed == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String?,
-      notificationsEnabled: null == notificationsEnabled
-          ? _value.notificationsEnabled
-          : notificationsEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
       favorites: null == favorites
           ? _value.favorites
           : favorites // ignore: cast_nullable_to_non_nullable
@@ -107,29 +86,26 @@ class _$SettingsModelCopyWithImpl<$Res, $Val extends SettingsModel>
 }
 
 /// @nodoc
-abstract class _$$SettingsModelImplCopyWith<$Res>
-    implements $SettingsModelCopyWith<$Res> {
-  factory _$$SettingsModelImplCopyWith(
-          _$SettingsModelImpl value, $Res Function(_$SettingsModelImpl) then) =
-      __$$SettingsModelImplCopyWithImpl<$Res>;
+abstract class _$$KeySettingEntityImplCopyWith<$Res>
+    implements $KeySettingEntityCopyWith<$Res> {
+  factory _$$KeySettingEntityImplCopyWith(_$KeySettingEntityImpl value,
+          $Res Function(_$KeySettingEntityImpl) then) =
+      __$$KeySettingEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String? uid,
       String updateTime,
-      bool darkMode,
-      String? language,
-      bool notificationsEnabled,
       @SsListStringConverter() List<String> favorites,
       @SsListStringConverter() List<String> recent});
 }
 
 /// @nodoc
-class __$$SettingsModelImplCopyWithImpl<$Res>
-    extends _$SettingsModelCopyWithImpl<$Res, _$SettingsModelImpl>
-    implements _$$SettingsModelImplCopyWith<$Res> {
-  __$$SettingsModelImplCopyWithImpl(
-      _$SettingsModelImpl _value, $Res Function(_$SettingsModelImpl) _then)
+class __$$KeySettingEntityImplCopyWithImpl<$Res>
+    extends _$KeySettingEntityCopyWithImpl<$Res, _$KeySettingEntityImpl>
+    implements _$$KeySettingEntityImplCopyWith<$Res> {
+  __$$KeySettingEntityImplCopyWithImpl(_$KeySettingEntityImpl _value,
+      $Res Function(_$KeySettingEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -137,13 +113,10 @@ class __$$SettingsModelImplCopyWithImpl<$Res>
   $Res call({
     Object? uid = freezed,
     Object? updateTime = null,
-    Object? darkMode = null,
-    Object? language = freezed,
-    Object? notificationsEnabled = null,
     Object? favorites = null,
     Object? recent = null,
   }) {
-    return _then(_$SettingsModelImpl(
+    return _then(_$KeySettingEntityImpl(
       uid: freezed == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -152,18 +125,6 @@ class __$$SettingsModelImplCopyWithImpl<$Res>
           ? _value.updateTime
           : updateTime // ignore: cast_nullable_to_non_nullable
               as String,
-      darkMode: null == darkMode
-          ? _value.darkMode
-          : darkMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-      language: freezed == language
-          ? _value.language
-          : language // ignore: cast_nullable_to_non_nullable
-              as String?,
-      notificationsEnabled: null == notificationsEnabled
-          ? _value.notificationsEnabled
-          : notificationsEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
       favorites: null == favorites
           ? _value._favorites
           : favorites // ignore: cast_nullable_to_non_nullable
@@ -178,31 +139,22 @@ class __$$SettingsModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SettingsModelImpl implements _SettingsModel {
-  _$SettingsModelImpl(
+class _$KeySettingEntityImpl implements _KeySettingEntity {
+  _$KeySettingEntityImpl(
       {this.uid,
       required this.updateTime,
-      required this.darkMode,
-      this.language,
-      required this.notificationsEnabled,
       @SsListStringConverter() required final List<String> favorites,
       @SsListStringConverter() required final List<String> recent})
       : _favorites = favorites,
         _recent = recent;
 
-  factory _$SettingsModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SettingsModelImplFromJson(json);
+  factory _$KeySettingEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$KeySettingEntityImplFromJson(json);
 
   @override
   final String? uid;
   @override
   final String updateTime;
-  @override
-  final bool darkMode;
-  @override
-  final String? language;
-  @override
-  final bool notificationsEnabled;
   final List<String> _favorites;
   @override
   @SsListStringConverter()
@@ -223,23 +175,17 @@ class _$SettingsModelImpl implements _SettingsModel {
 
   @override
   String toString() {
-    return 'SettingsModel(uid: $uid, updateTime: $updateTime, darkMode: $darkMode, language: $language, notificationsEnabled: $notificationsEnabled, favorites: $favorites, recent: $recent)';
+    return 'KeySettingEntity(uid: $uid, updateTime: $updateTime, favorites: $favorites, recent: $recent)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SettingsModelImpl &&
+            other is _$KeySettingEntityImpl &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.updateTime, updateTime) ||
                 other.updateTime == updateTime) &&
-            (identical(other.darkMode, darkMode) ||
-                other.darkMode == darkMode) &&
-            (identical(other.language, language) ||
-                other.language == language) &&
-            (identical(other.notificationsEnabled, notificationsEnabled) ||
-                other.notificationsEnabled == notificationsEnabled) &&
             const DeepCollectionEquality()
                 .equals(other._favorites, _favorites) &&
             const DeepCollectionEquality().equals(other._recent, _recent));
@@ -251,50 +197,39 @@ class _$SettingsModelImpl implements _SettingsModel {
       runtimeType,
       uid,
       updateTime,
-      darkMode,
-      language,
-      notificationsEnabled,
       const DeepCollectionEquality().hash(_favorites),
       const DeepCollectionEquality().hash(_recent));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SettingsModelImplCopyWith<_$SettingsModelImpl> get copyWith =>
-      __$$SettingsModelImplCopyWithImpl<_$SettingsModelImpl>(this, _$identity);
+  _$$KeySettingEntityImplCopyWith<_$KeySettingEntityImpl> get copyWith =>
+      __$$KeySettingEntityImplCopyWithImpl<_$KeySettingEntityImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SettingsModelImplToJson(
+    return _$$KeySettingEntityImplToJson(
       this,
     );
   }
 }
 
-abstract class _SettingsModel implements SettingsModel {
-  factory _SettingsModel(
+abstract class _KeySettingEntity implements KeySettingEntity {
+  factory _KeySettingEntity(
           {final String? uid,
           required final String updateTime,
-          required final bool darkMode,
-          final String? language,
-          required final bool notificationsEnabled,
           @SsListStringConverter() required final List<String> favorites,
           @SsListStringConverter() required final List<String> recent}) =
-      _$SettingsModelImpl;
+      _$KeySettingEntityImpl;
 
-  factory _SettingsModel.fromJson(Map<String, dynamic> json) =
-      _$SettingsModelImpl.fromJson;
+  factory _KeySettingEntity.fromJson(Map<String, dynamic> json) =
+      _$KeySettingEntityImpl.fromJson;
 
   @override
   String? get uid;
   @override
   String get updateTime;
-  @override
-  bool get darkMode;
-  @override
-  String? get language;
-  @override
-  bool get notificationsEnabled;
   @override
   @SsListStringConverter()
   List<String> get favorites;
@@ -303,6 +238,6 @@ abstract class _SettingsModel implements SettingsModel {
   List<String> get recent;
   @override
   @JsonKey(ignore: true)
-  _$$SettingsModelImplCopyWith<_$SettingsModelImpl> get copyWith =>
+  _$$KeySettingEntityImplCopyWith<_$KeySettingEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

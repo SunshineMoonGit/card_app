@@ -1,4 +1,3 @@
-
 import 'package:card_app/config/app/app_path.dart';
 import 'package:card_app/config/ui/app_dimensions.dart';
 import 'package:card_app/config/ui/theme_extension.dart';

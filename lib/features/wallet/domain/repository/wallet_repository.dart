@@ -1,5 +1,5 @@
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
-import 'package:card_app/shared/class/result/result.dart';
+import 'package:card_app/shared/class/result_model/result.dart';
 
 abstract class WalletRepository {
   // 유저 정보 리스트 가져오기 - network

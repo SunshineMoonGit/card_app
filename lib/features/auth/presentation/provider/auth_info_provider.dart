@@ -2,167 +2,107 @@ import 'package:card_app/config/app/app_enum.dart';
 import 'package:card_app/di/injector.dart';
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
 import 'package:card_app/features/auth/domain/repository/auth_repository.dart';
-import 'package:card_app/features/auth/domain/use_case/user_info_use_case.dart';
-import 'package:card_app/features/settings/domain/model/settings_model.dart';
-import 'package:card_app/features/settings/presentation/provider/settings_provider.dart';
+import 'package:card_app/features/auth/domain/use_case/auth_network_use_case.dart';
+import 'package:card_app/features/auth/presentation/provider/auth_state_provider.dart';
+import 'package:card_app/features/settings/data/model/key_setting_model.dart';
+import 'package:card_app/features/settings/domain/entity/custom_setting_entity.dart';
+import 'package:card_app/features/settings/domain/entity/key_setting_entity.dart';
+import 'package:card_app/features/settings/presentation/provider/custom_setting_provider.dart';
+import 'package:card_app/features/settings/presentation/provider/key_setting_provider.dart';
+import 'package:card_app/features/wallet/presentation/provider/error_provider.dart';
+import 'package:card_app/shared/class/result_model/result.dart';
+import 'package:card_app/shared/functions/hive/ss_hive.dart';
 import 'package:card_app/shared/functions/ss_print.dart';
+import 'package:card_app/shared/widgets/notification/ss_failure_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthInfoProviderNotifier extends StateNotifier<UserInfoEntity> {
-  AuthInfoProviderNotifier(this.ref) : super(UserInfoEntity());
+  AuthInfoProviderNotifier(this.ref) : super(UserInfoEntity(userType: UserType.normal));
 
   final AuthRepository repository = injector.get<AuthRepository>();
   final AuthNetworkUseCase authNetworkUseCase = injector.get<AuthNetworkUseCase>();
   final Ref ref;
 
-  late final TextEditingController nameController;
-  late final TextEditingController emailController;
-  late final TextEditingController profileImageController;
-  late final TextEditingController cardImageController;
-  late final TextEditingController teamController;
-  late final TextEditingController companyController;
-  late final TextEditingController phoneController;
-  late final TextEditingController faxController;
-
   //@ 사용 : signUp singIn newCard
-  void initControllers() {
-    nameController = TextEditingController(text: state.name);
-    emailController = TextEditingController(text: state.email);
-    profileImageController = TextEditingController(text: state.profileImage);
-    cardImageController = TextEditingController(text: state.cardImage);
-    teamController = TextEditingController(text: state.team);
-    companyController = TextEditingController(text: state.company);
-    phoneController = TextEditingController(text: state.phone);
-    faxController = TextEditingController(text: state.fax);
-
-    nameController.addListener(_updateController);
-    emailController.addListener(_updateController);
-    profileImageController.addListener(_updateController);
-    cardImageController.addListener(_updateController);
-    teamController.addListener(_updateController);
-    companyController.addListener(_updateController);
-    phoneController.addListener(_updateController);
-    faxController.addListener(_updateController);
-  }
 
   //@ 맨 처음 실행 되는 함수
   Future<void> init() async {
-    final String? uid = ref.read(settingsProvider).uid;
+    final String? uid = ref.read(keySettingProvider).uid;
 
-    if (uid == null) {
-      return;
-    }
-
-    state = await _getData(uid);
+    await _getData(uid!);
   }
 
   //@ Email 회원가입
   Future<void> signUpWithEmail(String email, String pw) async {
-    final SettingsModel settings = ref.read(settingsProvider);
+    final KeySettingEntity settings = ref.read(keySettingProvider);
 
-    await authNetworkUseCase.signUpWithEmail(email, pw, settings);
+    Result<UserInfoEntity> result = await authNetworkUseCase.signUpWithEmail(email, pw, settings);
 
-    state = await _getData(settings.uid!);
+    if (result.isFailure) {
+      // 실패 시 알림 표시
+      ref.read(errorProvider.notifier).update(result.errorMessage.toString());
+      return;
+    }
+
+    final KeySettingModel updateSettings = await SsHive.setting.key.get();
+
+    await ref.read(keySettingProvider.notifier).update(updateSettings.toEntity());
+
+    await _getData(updateSettings.uid!);
   }
 
   //@ Email 로그인
   Future<void> signInWithEmail(String email, String pw) async {
-    final SettingsModel settings = ref.read(settingsProvider);
+    final KeySettingEntity settings = ref.read(keySettingProvider);
     await authNetworkUseCase.signInWithEmail(email, pw, settings);
 
-    state = await _getData(settings.uid!);
+    await _getData(settings.uid!);
+  }
+
+  //@ SignOut
+  Future<void> clear() async {
+    state = UserInfoEntity();
   }
 
   Future<void> update(UserInfoEntity data) async {
-    ssPrint('updateData 시작!', 'auth_info_provider');
-
     final String uid = state.uid;
 
-    // state = state.copyWith(updateData: data);
+    await repository.updateBasicData(uid, data.copyWith(uid: uid));
 
-    await repository.updateBasicData(uid, state);
-    ssPrint('updateData 완료!', 'auth_info_provider');
+    state = data.copyWith(uid: uid);
   }
 
-  Future<void> updateFollowing(String uid) async {
-    state = state.addFollowing(uid);
+  Future<void> _getData(String uid) async {
+    final Result<UserInfoEntity> result = await authNetworkUseCase.get(uid);
+
+    result.when(
+      success: (value) {
+        state = value;
+      },
+      failure: (message) {
+        ref.read(errorProvider.notifier).update(message);
+        state = state.copyWith(uid: uid);
+        ref.read(authStateProvider.notifier).change(AuthState.authenticatedButIncomplete);
+      },
+    );
   }
 
-  Future<void> updateList({
-    required UpdateType updateType,
-    String? followingUid,
-    String? favoriteUid,
-  }) async {
-    List<String> followings = List.of(state.followings);
-    List<String> favorites = List.of(state.favorites);
-
+  //@ Following Method
+  Future<void> updateFollowing(UpdateType updateType, String uid) async {
+    // state 변경
     switch (updateType) {
       case UpdateType.add:
-        if (followingUid != null) {
-          ssPrint('$updateType 시작', 'auth_info_provider');
-          followings.add(followingUid);
-        }
-        if (favoriteUid != null) {
-          favorites.add(favoriteUid);
-        }
+        state = state.addFollowing(uid);
         break;
       case UpdateType.delete:
-        ssPrint('$updateType 시작', 'auth_info_provider');
-        ssPrint('$followingUid', 'auth_info_provider');
-
-        if (followingUid != null) {
-          followings.remove(followingUid);
-        }
-        if (favoriteUid != null) {
-          favorites.remove(favoriteUid);
-        }
-        break;
       case UpdateType.change:
-        ssPrint('$updateType 시작', 'auth_info_provider');
-        break;
     }
-
-    UserInfoEntity newData = state.copyWith(
-      followings: followings,
-      favorites: favorites,
-    );
-
-    await update(newData);
-    ssPrint('$updateType 완료', 'auth_info_provider');
+    // 저장소에 저장
+    await update(state);
   }
 
-  void _updateController() {
-    state = state.copyWith(
-      name: nameController.text,
-      email: emailController.text,
-      profileImage: profileImageController.text,
-      cardImage: cardImageController.text,
-      team: teamController.text,
-      company: companyController.text,
-      phone: phoneController.text,
-      fax: faxController.text,
-    );
-  }
-
-  Future<UserInfoEntity> _getData(String uid) async {
-    final UserInfoEntity result = await authNetworkUseCase.get(uid);
-
-    return result;
-  }
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    emailController.dispose();
-    profileImageController.dispose();
-    cardImageController.dispose();
-    teamController.dispose();
-    companyController.dispose();
-    phoneController.dispose();
-    faxController.dispose();
-    super.dispose();
-  }
+  Future<void> updateFavorite(UpdateType updateType, String uid) async {}
 }
 
 final authInfoProvider = StateNotifierProvider<AuthInfoProviderNotifier, UserInfoEntity>((ref) {

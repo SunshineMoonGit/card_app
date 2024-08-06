@@ -1,17 +1,20 @@
 import 'package:card_app/config/app/app_string.dart';
 import 'package:card_app/config/ui/app_dimensions.dart';
 import 'package:card_app/features/auth/presentation/screens/auth_with_email_screen.dart';
+import 'package:card_app/shared/class/controller_manager.dart';
+import 'package:card_app/shared/provider/controller_provider.dart';
 import 'package:card_app/shared/widgets/ss_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class SsAuthSelectLogInMethodsWidget extends StatelessWidget {
+class SsAuthSelectLogInMethodsWidget extends ConsumerWidget {
   const SsAuthSelectLogInMethodsWidget({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -20,7 +23,9 @@ class SsAuthSelectLogInMethodsWidget extends StatelessWidget {
           icon: Icons.email,
           title: AppString.email,
           backgroundColor: Colors.grey,
-          onTap: () => context.push(AuthWithEmailScreen.route, extra: false),
+          onTap: () {
+            context.push(AuthWithEmailScreen.route, extra: false);
+          },
           textColor: Colors.white,
         ),
         SsButtonWidget(

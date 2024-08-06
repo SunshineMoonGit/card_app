@@ -143,7 +143,7 @@ class SsUserInfoExternalWidget extends StatelessWidget {
                               child: SvgPicture.asset(
                                 height: 5,
                                 width: 5,
-                                '${AppPath.localSvg}${data.platform}.svg',
+                                '${AppPath.assetSvg}${data.platform}.svg',
                               ),
                             ),
                           ),

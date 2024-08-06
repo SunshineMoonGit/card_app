@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// import 'package:card_app/config/ui/theme/app_color.dart';
-
 part 'app_bar_theme.dart';
 part 'app_color.dart';
 part 'app_color_scheme.dart';

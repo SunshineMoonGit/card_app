@@ -4,7 +4,7 @@ import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
 import 'package:card_app/features/wallet/data/data_source/local/wallet_data_source_local.dart';
 import 'package:card_app/features/wallet/data/data_source/network/wallet_data_source_network.dart';
 import 'package:card_app/features/wallet/domain/repository/wallet_repository.dart';
-import 'package:card_app/shared/class/result/result.dart';
+import 'package:card_app/shared/class/result_model/result.dart';
 
 class WalletRepositoryImpl extends WalletRepository {
   final WalletDataSourceLocal localDataSource;

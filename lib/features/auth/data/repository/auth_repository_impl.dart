@@ -5,8 +5,10 @@ import 'package:card_app/features/auth/data/source/auth/local/auth_data_source_l
 import 'package:card_app/features/auth/data/source/auth/network/auth_data_source_network.dart';
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
 import 'package:card_app/features/auth/domain/repository/auth_repository.dart';
-import 'package:card_app/features/settings/domain/model/settings_model.dart';
-import 'package:card_app/shared/class/result/result.dart';
+import 'package:card_app/features/settings/data/model/key_setting_model.dart';
+import 'package:card_app/features/settings/domain/entity/custom_setting_entity.dart';
+import 'package:card_app/features/settings/domain/entity/key_setting_entity.dart';
+import 'package:card_app/shared/class/result_model/result.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   final AuthDataSourceLocal dataSourceLocal;
@@ -17,19 +19,31 @@ class AuthRepositoryImpl extends AuthRepository {
     required this.dataSourceNetwork,
   });
   @override
-  Future<void> signUpWithEmail(String email, String pw, SettingsModel settings) async {
-    return await dataSourceNetwork.signUpWithEmail(email, pw, settings);
+  Future<Result<UserInfoEntity>> signUpWithEmail(String email, String pw, KeySettingEntity settings) async {
+    final Result<UserInfoModel> result =
+        await dataSourceNetwork.signUpWithEmail(email, pw, KeySettingModel.fromEntity(settings));
+
+    return result.when(
+      success: (value) => Result.success(value.toEntity()),
+      failure: (message) => Result.failure(message),
+    );
   }
 
   @override
-  Future<void> signInWithEmail(String email, String pw, SettingsModel settings) async {
-    return await dataSourceNetwork.signInWithEmail(email, pw, settings);
+  Future<Result<UserInfoEntity>> signInWithEmail(String email, String pw, KeySettingEntity settings) async {
+    final Result<UserInfoModel> result =
+        await dataSourceNetwork.signInWithEmail(email, pw, KeySettingModel.fromEntity(settings));
+
+    return result.when(
+      success: (value) => Result.success(value.toEntity()),
+      failure: (message) => Result.failure(message),
+    );
   }
 
-  @override
-  Future<AuthState> check() {
-    return dataSourceLocal.check();
-  }
+  // @override
+  // Future<AuthState> check() async {
+  //   return dataSourceLocal.check();
+  // }
 
   @override
   Future<Result<UserInfoEntity>> getData(String uid) async {

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ControllerManager {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)
         signIn,
@@ -39,6 +40,7 @@ mixin _$ControllerManager {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
     TResult? Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)?
         signIn,
@@ -60,6 +62,7 @@ mixin _$ControllerManager {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)?
         signIn,
@@ -82,6 +85,7 @@ mixin _$ControllerManager {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyController value) empty,
     required TResult Function(SignInController value) signIn,
     required TResult Function(SignUpController value) signUp,
     required TResult Function(NewCardController value) newCard,
@@ -89,6 +93,7 @@ mixin _$ControllerManager {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EmptyController value)? empty,
     TResult? Function(SignInController value)? signIn,
     TResult? Function(SignUpController value)? signUp,
     TResult? Function(NewCardController value)? newCard,
@@ -96,6 +101,7 @@ mixin _$ControllerManager {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyController value)? empty,
     TResult Function(SignInController value)? signIn,
     TResult Function(SignUpController value)? signUp,
     TResult Function(NewCardController value)? newCard,
@@ -120,6 +126,163 @@ class _$ControllerManagerCopyWithImpl<$Res, $Val extends ControllerManager>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$EmptyControllerImplCopyWith<$Res> {
+  factory _$$EmptyControllerImplCopyWith(_$EmptyControllerImpl value,
+          $Res Function(_$EmptyControllerImpl) then) =
+      __$$EmptyControllerImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$EmptyControllerImplCopyWithImpl<$Res>
+    extends _$ControllerManagerCopyWithImpl<$Res, _$EmptyControllerImpl>
+    implements _$$EmptyControllerImplCopyWith<$Res> {
+  __$$EmptyControllerImplCopyWithImpl(
+      _$EmptyControllerImpl _value, $Res Function(_$EmptyControllerImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$EmptyControllerImpl extends EmptyController {
+  const _$EmptyControllerImpl() : super._();
+
+  @override
+  String toString() {
+    return 'ControllerManager.empty()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$EmptyControllerImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() empty,
+    required TResult Function(TextEditingController loginEmailController,
+            TextEditingController loginPwController)
+        signIn,
+    required TResult Function(
+            TextEditingController loginEmailController,
+            TextEditingController loginPwController,
+            TextEditingController login2PwController)
+        signUp,
+    required TResult Function(
+            TextEditingController nameController,
+            String cardImageController,
+            TextEditingController emailController,
+            TextEditingController teamController,
+            TextEditingController companyController,
+            TextEditingController phoneController,
+            TextEditingController faxController)
+        newCard,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
+    TResult? Function(TextEditingController loginEmailController,
+            TextEditingController loginPwController)?
+        signIn,
+    TResult? Function(
+            TextEditingController loginEmailController,
+            TextEditingController loginPwController,
+            TextEditingController login2PwController)?
+        signUp,
+    TResult? Function(
+            TextEditingController nameController,
+            String cardImageController,
+            TextEditingController emailController,
+            TextEditingController teamController,
+            TextEditingController companyController,
+            TextEditingController phoneController,
+            TextEditingController faxController)?
+        newCard,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
+    TResult Function(TextEditingController loginEmailController,
+            TextEditingController loginPwController)?
+        signIn,
+    TResult Function(
+            TextEditingController loginEmailController,
+            TextEditingController loginPwController,
+            TextEditingController login2PwController)?
+        signUp,
+    TResult Function(
+            TextEditingController nameController,
+            String cardImageController,
+            TextEditingController emailController,
+            TextEditingController teamController,
+            TextEditingController companyController,
+            TextEditingController phoneController,
+            TextEditingController faxController)?
+        newCard,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmptyController value) empty,
+    required TResult Function(SignInController value) signIn,
+    required TResult Function(SignUpController value) signUp,
+    required TResult Function(NewCardController value) newCard,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EmptyController value)? empty,
+    TResult? Function(SignInController value)? signIn,
+    TResult? Function(SignUpController value)? signUp,
+    TResult? Function(NewCardController value)? newCard,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyController value)? empty,
+    TResult Function(SignInController value)? signIn,
+    TResult Function(SignUpController value)? signUp,
+    TResult Function(NewCardController value)? newCard,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EmptyController extends ControllerManager {
+  const factory EmptyController() = _$EmptyControllerImpl;
+  const EmptyController._() : super._();
 }
 
 /// @nodoc
@@ -202,6 +365,7 @@ class _$SignInControllerImpl extends SignInController {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)
         signIn,
@@ -226,6 +390,7 @@ class _$SignInControllerImpl extends SignInController {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
     TResult? Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)?
         signIn,
@@ -250,6 +415,7 @@ class _$SignInControllerImpl extends SignInController {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)?
         signIn,
@@ -278,6 +444,7 @@ class _$SignInControllerImpl extends SignInController {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyController value) empty,
     required TResult Function(SignInController value) signIn,
     required TResult Function(SignUpController value) signUp,
     required TResult Function(NewCardController value) newCard,
@@ -288,6 +455,7 @@ class _$SignInControllerImpl extends SignInController {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EmptyController value)? empty,
     TResult? Function(SignInController value)? signIn,
     TResult? Function(SignUpController value)? signUp,
     TResult? Function(NewCardController value)? newCard,
@@ -298,6 +466,7 @@ class _$SignInControllerImpl extends SignInController {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyController value)? empty,
     TResult Function(SignInController value)? signIn,
     TResult Function(SignUpController value)? signUp,
     TResult Function(NewCardController value)? newCard,
@@ -416,6 +585,7 @@ class _$SignUpControllerImpl extends SignUpController {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)
         signIn,
@@ -440,6 +610,7 @@ class _$SignUpControllerImpl extends SignUpController {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
     TResult? Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)?
         signIn,
@@ -465,6 +636,7 @@ class _$SignUpControllerImpl extends SignUpController {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)?
         signIn,
@@ -494,6 +666,7 @@ class _$SignUpControllerImpl extends SignUpController {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyController value) empty,
     required TResult Function(SignInController value) signIn,
     required TResult Function(SignUpController value) signUp,
     required TResult Function(NewCardController value) newCard,
@@ -504,6 +677,7 @@ class _$SignUpControllerImpl extends SignUpController {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EmptyController value)? empty,
     TResult? Function(SignInController value)? signIn,
     TResult? Function(SignUpController value)? signUp,
     TResult? Function(NewCardController value)? newCard,
@@ -514,6 +688,7 @@ class _$SignUpControllerImpl extends SignUpController {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyController value)? empty,
     TResult Function(SignInController value)? signIn,
     TResult Function(SignUpController value)? signUp,
     TResult Function(NewCardController value)? newCard,
@@ -685,6 +860,7 @@ class _$NewCardControllerImpl extends NewCardController {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)
         signIn,
@@ -710,6 +886,7 @@ class _$NewCardControllerImpl extends NewCardController {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
     TResult? Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)?
         signIn,
@@ -735,6 +912,7 @@ class _$NewCardControllerImpl extends NewCardController {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function(TextEditingController loginEmailController,
             TextEditingController loginPwController)?
         signIn,
@@ -764,6 +942,7 @@ class _$NewCardControllerImpl extends NewCardController {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EmptyController value) empty,
     required TResult Function(SignInController value) signIn,
     required TResult Function(SignUpController value) signUp,
     required TResult Function(NewCardController value) newCard,
@@ -774,6 +953,7 @@ class _$NewCardControllerImpl extends NewCardController {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EmptyController value)? empty,
     TResult? Function(SignInController value)? signIn,
     TResult? Function(SignUpController value)? signUp,
     TResult? Function(NewCardController value)? newCard,
@@ -784,6 +964,7 @@ class _$NewCardControllerImpl extends NewCardController {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptyController value)? empty,
     TResult Function(SignInController value)? signIn,
     TResult Function(SignUpController value)? signUp,
     TResult Function(NewCardController value)? newCard,

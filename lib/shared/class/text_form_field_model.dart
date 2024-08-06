@@ -49,13 +49,32 @@ List<TextFormFieldModel> _login(SignInController controllers) {
 
 List<TextFormFieldModel> _signUp(SignUpController controllers) {
   return [
-    // ..._login(controllers, ref),
+    TextFormFieldModel(
+      title: 'email',
+      controller: controllers.loginEmailController,
+      validator: (val) {
+        return null;
+
+        // return SsValidator.containNumber(val);
+      },
+    ),
+    TextFormFieldModel(
+      title: 'pw',
+      controller: controllers.loginPwController,
+      validator: (val) {
+        return null;
+
+        // return SsValidator.containNumber(val);
+      },
+    ),
     TextFormFieldModel(
       title: 'pw check',
       controller: controllers.login2PwController,
       obscureText: true,
       validator: (val) {
-        return SsValidator.containNumber(val);
+        return null;
+
+        // return SsValidator.containNumber(val);
       },
     ),
   ];

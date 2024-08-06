@@ -3,16 +3,16 @@ import 'package:card_app/features/auth/data/model/user_info_model.dart';
 import 'package:hive/hive.dart';
 
 //@ List<UserInfoModel> wallet
-class SsHiveWallet {
-  static Future<void> add(UserInfoModel newData) async {
+class HiveWallet {
+  Future<void> add(UserInfoModel newData) async {
     await Hive.box(AppString.followings).add(newData.toJson());
   }
 
-  static int getLength() {
+  int getLength() {
     return Hive.box(AppString.followings).values.toList().length;
   }
 
-  static Future<List<UserInfoModel>> get(List<String> uidFollowings) async {
+  Future<List<UserInfoModel>> get(List<String> uidFollowings) async {
     final List<UserInfoModel> localData = Hive.box(AppString.followings)
         .values
         .toList()
@@ -28,11 +28,11 @@ class SsHiveWallet {
     return result;
   }
 
-  static void deleteAll() async {
+  void deleteAll() async {
     await Hive.box(AppString.followings).clear();
   }
 
-  static Future<void> delete(String uid) async {
+  Future<void> delete(String uid) async {
     final List<UserInfoModel> localData = Hive.box(AppString.followings)
         .values
         .toList()

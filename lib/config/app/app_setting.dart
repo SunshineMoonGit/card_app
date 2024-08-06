@@ -1,13 +1,15 @@
 import 'package:card_app/config/app/app_enum.dart';
+import 'package:card_app/config/app/app_path.dart';
 import 'package:card_app/config/app/app_string.dart';
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
 import 'package:card_app/features/auth/presentation/provider/auth_info_provider.dart';
+import 'package:card_app/features/settings/presentation/provider/setting_language_temp_provider.dart';
 import 'package:card_app/features/settings/presentation/provider/theme_provider.dart';
 import 'package:card_app/features/settings/presentation/screens/setting_auth_screen.dart';
 import 'package:card_app/features/settings/presentation/screens/setting_edit_text_form_screen.dart';
 import 'package:card_app/features/settings/presentation/screens/setting_language_screen.dart';
 import 'package:card_app/features/settings/presentation/screens/setting_display_screen.dart';
-import 'package:card_app/shared/provider/app_method.dart';
+import 'package:card_app/shared/provider/methods/app_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -71,7 +73,7 @@ class AppSettingFactory {
 
   List<AppSetting> main() {
     return [
-      AppSetting(title: AppString.auth, onTap: (_) => context.push(SettingAuthScreen.route), icon: Icons.person),
+      AppSetting(title: AppPath.auth, onTap: (_) => context.push(SettingAuthScreen.route), icon: Icons.person),
       AppSetting(title: AppString.display, onTap: (_) => context.push(SettingDisplayScreen.route), icon: Icons.pallet),
       AppSetting(
           title: AppString.language, onTap: (_) => context.push(SettingLanguageScreen.route), icon: Icons.person),
@@ -102,7 +104,7 @@ class AppSettingFactory {
     return [
       AppSetting(
         title: AppString.darkMode,
-        onTap: (_) => appMethod.changeTheme(),
+        onTap: (_) => appMethod.theme.changeTheme(),
         value: ref.watch(themeProvider),
         rowType: SettingRowType.bool,
       ),
@@ -113,14 +115,14 @@ class AppSettingFactory {
     return [
       AppSetting(
         title: AppString.en,
-        onTap: (_) => appMethod.changeLanguageTemp(AppString.en),
-        value: appMethod.checkLanguageTemp(AppString.en),
+        onTap: (_) => appMethod.theme.changeLanguageTemp(AppString.en),
+        value: ref.watch(settingLanguageTempProvider) == AppString.en,
         rowType: SettingRowType.check,
       ),
       AppSetting(
         title: AppString.ko,
-        onTap: (_) => appMethod.changeLanguageTemp(AppString.ko),
-        value: appMethod.checkLanguageTemp(AppString.ko),
+        onTap: (_) => appMethod.theme.changeLanguageTemp(AppString.ko),
+        value: ref.watch(settingLanguageTempProvider) == AppString.ko,
         rowType: SettingRowType.check,
       ),
     ];

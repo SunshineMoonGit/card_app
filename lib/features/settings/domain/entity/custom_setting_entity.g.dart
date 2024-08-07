@@ -9,9 +9,13 @@ part of 'custom_setting_entity.dart';
 _$CustomSettingEntityImpl _$$CustomSettingEntityImplFromJson(
         Map<String, dynamic> json) =>
     _$CustomSettingEntityImpl(
-      darkMode: json['darkMode'] as bool,
+      darkMode: json['darkMode'] as bool? ?? false,
       language: json['language'] as String?,
-      notificationsEnabled: json['notificationsEnabled'] as bool,
+      notificationsEnabled: json['notificationsEnabled'] as bool? ?? true,
+      recent: (json['recent'] as List<dynamic>?)
+              ?.map((e) => (e as num).toInt())
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$CustomSettingEntityImplToJson(
@@ -20,4 +24,5 @@ Map<String, dynamic> _$$CustomSettingEntityImplToJson(
       'darkMode': instance.darkMode,
       'language': instance.language,
       'notificationsEnabled': instance.notificationsEnabled,
+      'recent': instance.recent,
     };

@@ -1,6 +1,7 @@
 import 'package:card_app/config/app/app_string.dart';
 import 'package:card_app/config/ui/theme_extension.dart';
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
+import 'package:card_app/features/wallet/domain/entity/following_entity.dart';
 import 'package:card_app/features/wallet/presentation/provider/wallet_provider.dart';
 import 'package:card_app/features/wallet/presentation/widget/empty_wallet_widget.dart';
 import 'package:card_app/features/wallet/presentation/widget/list_wallet_widget.dart';
@@ -17,7 +18,7 @@ class WalletScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<UserInfoEntity> followings = ref.watch(walletProvider).followings;
+    List<FollowingEntity<UserInfoEntity>> followings = ref.watch(walletProvider);
 
     List<SsActionsModel> actions = [
       SsActionsModel(

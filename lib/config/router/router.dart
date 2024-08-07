@@ -15,7 +15,7 @@ import 'package:card_app/features/settings/presentation/screens/setting_display_
 import 'package:card_app/features/commons/presentation/splash_screen.dart';
 import 'package:card_app/features/auth/presentation/screens/auth_user_info_input_screen.dart';
 import 'package:card_app/features/commons/presentation/home_page.dart';
-import 'package:card_app/shared/class/controller_manager.dart';
+import 'package:card_app/features/wallet/domain/entity/following_entity.dart';
 import 'package:card_app/shared/functions/ss_print.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -87,7 +87,7 @@ class _RedirectNotifier extends ChangeNotifier {
         // Wallet
         GoRoute(
             path: AuthUserInfoScreen.route,
-            builder: (context, state) => AuthUserInfoScreen(userData: state.extra as UserInfoEntity)),
+            builder: (context, state) => AuthUserInfoScreen(userData: state.extra as FollowingEntity<UserInfoEntity>)),
         GoRoute(
           path: FullImageViewerScreen.route,
           builder: (context, state) => FullImageViewerScreen(imageUrl: state.extra as String),

@@ -17,7 +17,7 @@ class CustomSettingModel with _$CustomSettingModel {
 
   factory CustomSettingModel.fromJson(Map<String, dynamic> json) => _$CustomSettingModelFromJson(json);
 
-  factory CustomSettingModel.fromEntity(CustomSettingEntity entity) => CustomSettingMapper.toModel(entity);
+  factory CustomSettingModel.fromEntity(CustomSettingEntity entity) => CustomSettingMapper.fromEntity(entity);
 
   CustomSettingEntity toEntity() => CustomSettingMapper.toEntity(this);
 

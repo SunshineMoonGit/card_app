@@ -5,7 +5,6 @@ import 'package:card_app/shared/provider/methods/app_method.dart';
 import 'package:card_app/shared/widgets/ss_button_widget.dart';
 import 'package:card_app/shared/widgets/ss_layout.dart';
 import 'package:card_app/shared/widgets/ss_render_setting_column_widget.dart.dart';
-import 'package:card_app/shared/widgets/text_form_field/ss_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

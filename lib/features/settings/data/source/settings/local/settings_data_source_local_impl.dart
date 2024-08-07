@@ -1,13 +1,7 @@
 import 'package:card_app/features/settings/data/model/custom_setting_model.dart';
 import 'package:card_app/features/settings/data/model/key_setting_model.dart';
 import 'package:card_app/features/settings/data/source/settings/local/settings_data_source_local.dart';
-import 'package:card_app/features/settings/domain/entity/custom_setting_entity.dart';
-import 'package:card_app/features/settings/domain/entity/key_setting_entity.dart';
-import 'package:card_app/shared/class/result_model/result.dart';
 import 'package:card_app/shared/functions/hive/ss_hive.dart';
-import 'package:card_app/shared/functions/hive/ss_hive_setting.dart';
-import 'package:card_app/shared/functions/ss_print.dart';
-import 'package:hive/hive.dart';
 
 class SettingsDataSourceLocalImpl extends SettingsDataSourceLocal {
   @override

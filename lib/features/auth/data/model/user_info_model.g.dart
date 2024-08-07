@@ -20,14 +20,9 @@ _$UserInfoModelImpl _$$UserInfoModelImplFromJson(Map<String, dynamic> json) =>
       phone: json['phone'] as String? ?? '',
       fax: json['fax'] as String? ?? '',
       lastUpdate: json['lastUpdate'] as String? ?? '',
-      followings: (json['followings'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
-      favorites: (json['favorites'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
+      followings: json['followings'] == null
+          ? const []
+          : _followingsFromJson(json['followings'] as List),
       external: (json['external'] as List<dynamic>?)
               ?.map((e) => SsExternalModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -47,8 +42,7 @@ Map<String, dynamic> _$$UserInfoModelImplToJson(_$UserInfoModelImpl instance) =>
       'phone': instance.phone,
       'fax': instance.fax,
       'lastUpdate': instance.lastUpdate,
-      'followings': instance.followings,
-      'favorites': instance.favorites,
+      'followings': _followingsToJson(instance.followings),
       'external': instance.external,
     };
 

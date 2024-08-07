@@ -1,11 +1,9 @@
 import 'dart:convert';
 
-import 'package:card_app/config/app/app_enum.dart';
 import 'package:card_app/config/app/app_path.dart';
 import 'package:card_app/features/auth/data/model/user_info_model.dart';
 import 'package:card_app/features/auth/data/source/auth/local/auth_data_source_local.dart';
 import 'package:card_app/shared/functions/hive/ss_hive.dart';
-import 'package:card_app/shared/functions/hive/ss_hive_auth.dart';
 import 'package:flutter/services.dart';
 
 class AuthDataSourceLocalImpl extends AuthDataSourceLocal {

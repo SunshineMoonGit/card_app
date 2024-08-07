@@ -1,10 +1,6 @@
 import 'package:card_app/config/app/app_path.dart';
-import 'package:card_app/config/app/app_string.dart';
-import 'package:card_app/features/auth/data/model/user_info_model.dart';
 import 'package:card_app/features/settings/data/model/custom_setting_model.dart';
 import 'package:card_app/features/settings/data/model/key_setting_model.dart';
-import 'package:card_app/features/settings/domain/entity/custom_setting_entity.dart';
-import 'package:card_app/features/settings/domain/entity/key_setting_entity.dart';
 import 'package:hive/hive.dart';
 
 class HiveSetting {

@@ -1,7 +1,6 @@
 import 'package:card_app/di/injector.dart';
 import 'package:card_app/features/settings/domain/entity/custom_setting_entity.dart';
 import 'package:card_app/features/settings/domain/use_case/custom_setting_local_use_case.dart';
-import 'package:card_app/shared/class/result_model/result.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final customSettingProvider = StateNotifierProvider<CustomSettingProviderNotifier, CustomSettingEntity>((ref) {

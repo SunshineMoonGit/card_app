@@ -11,14 +11,14 @@ import 'package:card_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:card_app/features/settings/domain/repository/settings_repository.dart';
 import 'package:card_app/features/settings/domain/use_case/custom_setting_local_use_case.dart';
 import 'package:card_app/features/settings/domain/use_case/key_setting_local_use_case.dart';
-import 'package:card_app/features/wallet/data/data_source/local/wallet_data_source_local_impl.dart';
-import 'package:card_app/features/wallet/data/data_source/network/wallet_data_source_network.dart';
-import 'package:card_app/features/wallet/data/data_source/network/wallet_data_source_network_impl.dart';
-import 'package:card_app/features/wallet/data/data_source/local/wallet_data_source_local.dart';
+import 'package:card_app/features/wallet/data/source/local/wallet_data_source_local_impl.dart';
+import 'package:card_app/features/wallet/data/source/network/wallet_data_source_network.dart';
+import 'package:card_app/features/wallet/data/source/network/wallet_data_source_network_impl.dart';
+import 'package:card_app/features/wallet/data/source/local/wallet_data_source_local.dart';
 import 'package:card_app/features/wallet/data/repository/wallet_repository_impl.dart';
 import 'package:card_app/features/wallet/domain/repository/wallet_repository.dart';
-import 'package:card_app/features/wallet/domain/use_case/get_wallet_network.dart';
 import 'package:card_app/features/wallet/domain/use_case/wallet_local_use_case.dart';
+import 'package:card_app/features/wallet/domain/use_case/wallet_network_use_case.dart';
 import 'package:get_it/get_it.dart';
 
 final injector = GetIt.instance;
@@ -40,12 +40,15 @@ void provideDataSources() {
 }
 
 void provideRepositories() {
-  // Wallet
-  injector.registerFactory<WalletRepository>(() => WalletRepositoryImpl(
+  //@ Wallet
+  injector.registerFactory<WalletRepository>(
+    () => WalletRepositoryImpl(
       localDataSource: injector.get<WalletDataSourceLocal>(),
-      networkDataSource: injector.get<WalletDataSourceNetwork>()));
+      networkDataSource: injector.get<WalletDataSourceNetwork>(),
+    ),
+  );
 
-  // Auth
+  //@ Auth
   injector.registerFactory<AuthRepository>(
     () => AuthRepositoryImpl(
       dataSourceLocal: injector.get<AuthDataSourceLocal>(),
@@ -53,23 +56,23 @@ void provideRepositories() {
     ),
   );
 
-  // Settings
+  //@ Settings
   injector.registerFactory<SettingsRepository>(
     () => SettingsRepositoryImpl(dataSource: injector.get<SettingsDataSourceLocal>()),
   );
 }
 
 void provideUseCases() {
-  // WalletNetwork
-  injector.registerFactory<GetWalletNetWorkUseCase>(
-      () => GetWalletNetWorkUseCase(repository: injector.get<WalletRepository>()));
-  // WalletLocal
+  //@ WalletNetwork
+  injector
+      .registerFactory<WalletNetworkUseCase>(() => WalletNetworkUseCase(repository: injector.get<WalletRepository>()));
+  //@ WalletLocal
   injector.registerFactory<WalletLocalUseCase>(() => WalletLocalUseCase(repository: injector.get<WalletRepository>()));
 
-  // Auth
+  //@ Auth
   injector.registerFactory<AuthNetworkUseCase>(() => AuthNetworkUseCase(repository: injector.get<AuthRepository>()));
 
-  // Settings
+  //@ Settings
   injector.registerFactory<CustomSettingLocalUseCase>(
       () => CustomSettingLocalUseCase(repository: injector.get<SettingsRepository>()));
   injector.registerFactory<KeySettingLocalUseCase>(

@@ -4,7 +4,6 @@ import 'package:card_app/features/auth/presentation/provider/auth_info_provider.
 import 'package:card_app/features/wallet/presentation/provider/custom_image_provider.dart';
 import 'package:card_app/features/wallet/presentation/provider/wallet_provider.dart';
 import 'package:card_app/shared/class/controller_manager.dart';
-import 'package:card_app/shared/class/result_model/result.dart';
 import 'package:card_app/shared/provider/controller_provider.dart';
 import 'package:card_app/shared/provider/methods/app_method.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,7 +26,7 @@ class WalletMethod {
     ref.read(authInfoProvider.notifier).updateFollowing(UpdateType.add, newData.uid);
 
     // 로컬에 저장 (UserInfoModel) + 임시로 UserType
-    await ref.read(walletProvider.notifier).addLocal(newData, UserType.normal);
+    await ref.read(walletProvider.notifier).add(newData);
 
     ref.read(customImageProvider.notifier).clear();
   }

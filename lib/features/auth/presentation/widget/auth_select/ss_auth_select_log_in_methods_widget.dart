@@ -1,8 +1,6 @@
 import 'package:card_app/config/app/app_string.dart';
 import 'package:card_app/config/ui/app_dimensions.dart';
 import 'package:card_app/features/auth/presentation/screens/auth_with_email_screen.dart';
-import 'package:card_app/shared/class/controller_manager.dart';
-import 'package:card_app/shared/provider/controller_provider.dart';
 import 'package:card_app/shared/widgets/ss_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -3,7 +3,6 @@ import 'package:card_app/features/wallet/presentation/provider/page_index_provid
 import 'package:card_app/features/auth/presentation/screens/auth_user_info_input_screen.dart';
 import 'package:card_app/features/wallet/presentation/screens/home_screen.dart';
 import 'package:card_app/features/wallet/presentation/screens/wallet_screen.dart';
-import 'package:card_app/shared/class/controller_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,20 +1,16 @@
 import 'package:card_app/features/auth/data/model/user_info_model.dart';
-import 'package:card_app/features/wallet/data/data_source/local/wallet_data_source_local.dart';
+import 'package:card_app/features/wallet/data/model/following_model.dart';
+import 'package:card_app/features/wallet/data/source/local/wallet_data_source_local.dart';
 import 'package:card_app/shared/class/result_model/result.dart';
 import 'package:card_app/shared/functions/hive/ss_hive.dart';
-import 'package:card_app/shared/functions/hive/ss_hive_following.dart';
 
 class WalletDataSourceLocalImpl extends WalletDataSourceLocal {
   @override
-  Future<Result<List<UserInfoModel>>> getLocal(List<String> uidFollowings) async {
-    if (uidFollowings.isEmpty) {
-      return const Result.success([]);
-    }
-
+  Future<Result<List<FollowingModel<UserInfoModel>>>> getLocal(List<FollowingModel<String>> uids) async {
     try {
-      List<UserInfoModel> data = await SsHive.wallet.get(uidFollowings);
+      final List<FollowingModel<UserInfoModel>> localData = await SsHive.wallet.get(uids);
 
-      return Result.success(data);
+      return Result.success(localData);
     } catch (e) {
       return Result.failure(e.toString());
     }

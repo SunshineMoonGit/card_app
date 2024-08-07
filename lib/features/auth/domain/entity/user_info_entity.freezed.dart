@@ -28,8 +28,8 @@ mixin _$UserInfoEntity {
   String get fax => throw _privateConstructorUsedError;
   String get lastUpdate =>
       throw _privateConstructorUsedError; // ------ premium ------
-  List<String> get followings => throw _privateConstructorUsedError;
-  List<String> get favorites => throw _privateConstructorUsedError;
+  List<FollowingEntity<String>> get followings =>
+      throw _privateConstructorUsedError;
   List<SsExternalModel> get external => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -55,8 +55,7 @@ abstract class $UserInfoEntityCopyWith<$Res> {
       String phone,
       String fax,
       String lastUpdate,
-      List<String> followings,
-      List<String> favorites,
+      List<FollowingEntity<String>> followings,
       List<SsExternalModel> external});
 }
 
@@ -85,7 +84,6 @@ class _$UserInfoEntityCopyWithImpl<$Res, $Val extends UserInfoEntity>
     Object? fax = null,
     Object? lastUpdate = null,
     Object? followings = null,
-    Object? favorites = null,
     Object? external = null,
   }) {
     return _then(_value.copyWith(
@@ -136,11 +134,7 @@ class _$UserInfoEntityCopyWithImpl<$Res, $Val extends UserInfoEntity>
       followings: null == followings
           ? _value.followings
           : followings // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      favorites: null == favorites
-          ? _value.favorites
-          : favorites // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<FollowingEntity<String>>,
       external: null == external
           ? _value.external
           : external // ignore: cast_nullable_to_non_nullable
@@ -169,8 +163,7 @@ abstract class _$$UserInfoEntityImplCopyWith<$Res>
       String phone,
       String fax,
       String lastUpdate,
-      List<String> followings,
-      List<String> favorites,
+      List<FollowingEntity<String>> followings,
       List<SsExternalModel> external});
 }
 
@@ -197,7 +190,6 @@ class __$$UserInfoEntityImplCopyWithImpl<$Res>
     Object? fax = null,
     Object? lastUpdate = null,
     Object? followings = null,
-    Object? favorites = null,
     Object? external = null,
   }) {
     return _then(_$UserInfoEntityImpl(
@@ -248,11 +240,7 @@ class __$$UserInfoEntityImplCopyWithImpl<$Res>
       followings: null == followings
           ? _value._followings
           : followings // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      favorites: null == favorites
-          ? _value._favorites
-          : favorites // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<FollowingEntity<String>>,
       external: null == external
           ? _value._external
           : external // ignore: cast_nullable_to_non_nullable
@@ -276,11 +264,9 @@ class _$UserInfoEntityImpl extends _UserInfoEntity {
       this.phone = '',
       this.fax = '',
       this.lastUpdate = '',
-      final List<String> followings = const [],
-      final List<String> favorites = const [],
+      final List<FollowingEntity<String>> followings = const [],
       final List<SsExternalModel> external = const []})
       : _followings = followings,
-        _favorites = favorites,
         _external = external,
         super._();
 
@@ -318,23 +304,14 @@ class _$UserInfoEntityImpl extends _UserInfoEntity {
   @JsonKey()
   final String lastUpdate;
 // ------ premium ------
-  final List<String> _followings;
+  final List<FollowingEntity<String>> _followings;
 // ------ premium ------
   @override
   @JsonKey()
-  List<String> get followings {
+  List<FollowingEntity<String>> get followings {
     if (_followings is EqualUnmodifiableListView) return _followings;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_followings);
-  }
-
-  final List<String> _favorites;
-  @override
-  @JsonKey()
-  List<String> get favorites {
-    if (_favorites is EqualUnmodifiableListView) return _favorites;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_favorites);
   }
 
   final List<SsExternalModel> _external;
@@ -348,7 +325,7 @@ class _$UserInfoEntityImpl extends _UserInfoEntity {
 
   @override
   String toString() {
-    return 'UserInfoEntity(uid: $uid, userType: $userType, name: $name, profileImage: $profileImage, cardImage: $cardImage, email: $email, team: $team, company: $company, phone: $phone, fax: $fax, lastUpdate: $lastUpdate, followings: $followings, favorites: $favorites, external: $external)';
+    return 'UserInfoEntity(uid: $uid, userType: $userType, name: $name, profileImage: $profileImage, cardImage: $cardImage, email: $email, team: $team, company: $company, phone: $phone, fax: $fax, lastUpdate: $lastUpdate, followings: $followings, external: $external)';
   }
 
   @override
@@ -373,8 +350,6 @@ class _$UserInfoEntityImpl extends _UserInfoEntity {
                 other.lastUpdate == lastUpdate) &&
             const DeepCollectionEquality()
                 .equals(other._followings, _followings) &&
-            const DeepCollectionEquality()
-                .equals(other._favorites, _favorites) &&
             const DeepCollectionEquality().equals(other._external, _external));
   }
 
@@ -393,7 +368,6 @@ class _$UserInfoEntityImpl extends _UserInfoEntity {
       fax,
       lastUpdate,
       const DeepCollectionEquality().hash(_followings),
-      const DeepCollectionEquality().hash(_favorites),
       const DeepCollectionEquality().hash(_external));
 
   @JsonKey(ignore: true)
@@ -417,8 +391,7 @@ abstract class _UserInfoEntity extends UserInfoEntity {
       final String phone,
       final String fax,
       final String lastUpdate,
-      final List<String> followings,
-      final List<String> favorites,
+      final List<FollowingEntity<String>> followings,
       final List<SsExternalModel> external}) = _$UserInfoEntityImpl;
   _UserInfoEntity._() : super._();
 
@@ -445,9 +418,7 @@ abstract class _UserInfoEntity extends UserInfoEntity {
   @override
   String get lastUpdate;
   @override // ------ premium ------
-  List<String> get followings;
-  @override
-  List<String> get favorites;
+  List<FollowingEntity<String>> get followings;
   @override
   List<SsExternalModel> get external;
   @override

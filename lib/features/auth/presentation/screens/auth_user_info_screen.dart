@@ -4,6 +4,7 @@ import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
 import 'package:card_app/features/auth/presentation/widget/shared/ss_user_info_basic_widget.dart';
 import 'package:card_app/features/auth/presentation/widget/shared/ss_user_info_external_widget.dart';
 import 'package:card_app/features/auth/presentation/widget/shared/ss_user_info_card_widget/ss_user_info_card_widget.dart';
+import 'package:card_app/features/wallet/domain/entity/following_entity.dart';
 import 'package:card_app/shared/provider/methods/app_method.dart';
 import 'package:card_app/shared/widgets/ss_button_widget.dart';
 import 'package:card_app/shared/widgets/ss_layout.dart';
@@ -12,7 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class AuthUserInfoScreen extends StatelessWidget {
-  final UserInfoEntity userData;
+  final FollowingEntity<UserInfoEntity> userData;
 
   static String get route => '/auth_user_info';
 
@@ -30,15 +31,15 @@ class AuthUserInfoScreen extends StatelessWidget {
       actions: _action(),
       body: CustomScrollView(
         slivers: [
-          SsUserInfoCardWidget(userData: userData),
+          SsUserInfoCardWidget(userData: userData.user),
 
           //@ 정보 & 관리, 수정
-          SsUserInfoBasicWidget(userData: userData),
+          SsUserInfoBasicWidget(userData: userData.user),
 
           //@ 추가 정보
-          SsUserInfoExternalWidget(external: userData.external, canEdit: false),
+          SsUserInfoExternalWidget(external: userData.user.external, canEdit: false),
 
-          _deleteButton(userData.uid),
+          _deleteButton(userData.user.uid),
         ],
       ),
     );

@@ -14,8 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) {
-  return _UserInfoModel.fromJson(json);
+UserInfoModel _$UserInfoModelFromJson(
+  Map<String, dynamic> json,
+) {
+  return _UserInfoModel.fromJson(
+    json,
+  );
 }
 
 /// @nodoc
@@ -32,8 +36,9 @@ mixin _$UserInfoModel {
   String get fax => throw _privateConstructorUsedError;
   String get lastUpdate =>
       throw _privateConstructorUsedError; // ------ premium ------
-  List<String> get followings => throw _privateConstructorUsedError;
-  List<String> get favorites => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _followingsFromJson, toJson: _followingsToJson)
+  List<FollowingModel<String>> get followings =>
+      throw _privateConstructorUsedError; // @Default([]) List<String> favorites,
   List<SsExternalModel> get external => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -60,8 +65,8 @@ abstract class $UserInfoModelCopyWith<$Res> {
       String phone,
       String fax,
       String lastUpdate,
-      List<String> followings,
-      List<String> favorites,
+      @JsonKey(fromJson: _followingsFromJson, toJson: _followingsToJson)
+      List<FollowingModel<String>> followings,
       List<SsExternalModel> external});
 }
 
@@ -90,7 +95,6 @@ class _$UserInfoModelCopyWithImpl<$Res, $Val extends UserInfoModel>
     Object? fax = null,
     Object? lastUpdate = null,
     Object? followings = null,
-    Object? favorites = null,
     Object? external = null,
   }) {
     return _then(_value.copyWith(
@@ -141,11 +145,7 @@ class _$UserInfoModelCopyWithImpl<$Res, $Val extends UserInfoModel>
       followings: null == followings
           ? _value.followings
           : followings // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      favorites: null == favorites
-          ? _value.favorites
-          : favorites // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<FollowingModel<String>>,
       external: null == external
           ? _value.external
           : external // ignore: cast_nullable_to_non_nullable
@@ -174,8 +174,8 @@ abstract class _$$UserInfoModelImplCopyWith<$Res>
       String phone,
       String fax,
       String lastUpdate,
-      List<String> followings,
-      List<String> favorites,
+      @JsonKey(fromJson: _followingsFromJson, toJson: _followingsToJson)
+      List<FollowingModel<String>> followings,
       List<SsExternalModel> external});
 }
 
@@ -202,7 +202,6 @@ class __$$UserInfoModelImplCopyWithImpl<$Res>
     Object? fax = null,
     Object? lastUpdate = null,
     Object? followings = null,
-    Object? favorites = null,
     Object? external = null,
   }) {
     return _then(_$UserInfoModelImpl(
@@ -253,11 +252,7 @@ class __$$UserInfoModelImplCopyWithImpl<$Res>
       followings: null == followings
           ? _value._followings
           : followings // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      favorites: null == favorites
-          ? _value._favorites
-          : favorites // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<FollowingModel<String>>,
       external: null == external
           ? _value._external
           : external // ignore: cast_nullable_to_non_nullable
@@ -281,16 +276,19 @@ class _$UserInfoModelImpl extends _UserInfoModel {
       this.phone = '',
       this.fax = '',
       this.lastUpdate = '',
-      final List<String> followings = const [],
-      final List<String> favorites = const [],
+      @JsonKey(fromJson: _followingsFromJson, toJson: _followingsToJson)
+      final List<FollowingModel<String>> followings = const [],
       final List<SsExternalModel> external = const []})
       : _followings = followings,
-        _favorites = favorites,
         _external = external,
         super._();
 
-  factory _$UserInfoModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserInfoModelImplFromJson(json);
+  factory _$UserInfoModelImpl.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      _$$UserInfoModelImplFromJson(
+        json,
+      );
 
   @override
   @JsonKey()
@@ -326,26 +324,19 @@ class _$UserInfoModelImpl extends _UserInfoModel {
   @JsonKey()
   final String lastUpdate;
 // ------ premium ------
-  final List<String> _followings;
+  final List<FollowingModel<String>> _followings;
 // ------ premium ------
   @override
-  @JsonKey()
-  List<String> get followings {
+  @JsonKey(fromJson: _followingsFromJson, toJson: _followingsToJson)
+  List<FollowingModel<String>> get followings {
     if (_followings is EqualUnmodifiableListView) return _followings;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_followings);
   }
 
-  final List<String> _favorites;
-  @override
-  @JsonKey()
-  List<String> get favorites {
-    if (_favorites is EqualUnmodifiableListView) return _favorites;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_favorites);
-  }
-
+// @Default([]) List<String> favorites,
   final List<SsExternalModel> _external;
+// @Default([]) List<String> favorites,
   @override
   @JsonKey()
   List<SsExternalModel> get external {
@@ -356,7 +347,7 @@ class _$UserInfoModelImpl extends _UserInfoModel {
 
   @override
   String toString() {
-    return 'UserInfoModel(uid: $uid, userType: $userType, name: $name, profileImage: $profileImage, cardImage: $cardImage, email: $email, team: $team, company: $company, phone: $phone, fax: $fax, lastUpdate: $lastUpdate, followings: $followings, favorites: $favorites, external: $external)';
+    return 'UserInfoModel(uid: $uid, userType: $userType, name: $name, profileImage: $profileImage, cardImage: $cardImage, email: $email, team: $team, company: $company, phone: $phone, fax: $fax, lastUpdate: $lastUpdate, followings: $followings, external: $external)';
   }
 
   @override
@@ -381,8 +372,6 @@ class _$UserInfoModelImpl extends _UserInfoModel {
                 other.lastUpdate == lastUpdate) &&
             const DeepCollectionEquality()
                 .equals(other._followings, _followings) &&
-            const DeepCollectionEquality()
-                .equals(other._favorites, _favorites) &&
             const DeepCollectionEquality().equals(other._external, _external));
   }
 
@@ -402,7 +391,6 @@ class _$UserInfoModelImpl extends _UserInfoModel {
       fax,
       lastUpdate,
       const DeepCollectionEquality().hash(_followings),
-      const DeepCollectionEquality().hash(_favorites),
       const DeepCollectionEquality().hash(_external));
 
   @JsonKey(ignore: true)
@@ -432,13 +420,14 @@ abstract class _UserInfoModel extends UserInfoModel {
       final String phone,
       final String fax,
       final String lastUpdate,
-      final List<String> followings,
-      final List<String> favorites,
+      @JsonKey(fromJson: _followingsFromJson, toJson: _followingsToJson)
+      final List<FollowingModel<String>> followings,
       final List<SsExternalModel> external}) = _$UserInfoModelImpl;
   _UserInfoModel._() : super._();
 
-  factory _UserInfoModel.fromJson(Map<String, dynamic> json) =
-      _$UserInfoModelImpl.fromJson;
+  factory _UserInfoModel.fromJson(
+    Map<String, dynamic> json,
+  ) = _$UserInfoModelImpl.fromJson;
 
   @override
   String get uid;
@@ -463,10 +452,9 @@ abstract class _UserInfoModel extends UserInfoModel {
   @override
   String get lastUpdate;
   @override // ------ premium ------
-  List<String> get followings;
-  @override
-  List<String> get favorites;
-  @override
+  @JsonKey(fromJson: _followingsFromJson, toJson: _followingsToJson)
+  List<FollowingModel<String>> get followings;
+  @override // @Default([]) List<String> favorites,
   List<SsExternalModel> get external;
   @override
   @JsonKey(ignore: true)

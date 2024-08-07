@@ -2,6 +2,7 @@ import 'package:card_app/config/app/app_enum.dart';
 import 'package:card_app/config/app/app_string.dart';
 import 'package:card_app/config/mapper/user_info_mapper.dart';
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
+import 'package:card_app/features/wallet/data/model/following_model.dart';
 import 'package:card_app/shared/class/ss_external_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,8 +10,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_info_model.freezed.dart';
 part 'user_info_model.g.dart';
 
-@freezed
-abstract class UserInfoModel with _$UserInfoModel {
+@Freezed(genericArgumentFactories: true)
+class UserInfoModel with _$UserInfoModel {
   const UserInfoModel._();
 
   factory UserInfoModel({
@@ -26,18 +27,28 @@ abstract class UserInfoModel with _$UserInfoModel {
     @Default('') String fax,
     @Default('') String lastUpdate,
     // ------ premium ------
-    @Default([]) List<String> followings,
-    @Default([]) List<String> favorites,
+    @JsonKey(fromJson: _followingsFromJson, toJson: _followingsToJson)
+    @Default([])
+    List<FollowingModel<String>> followings,
+    // @Default([]) List<String> favorites,
     @Default([]) List<SsExternalModel> external,
   }) = _UserInfoModel;
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) => _$UserInfoModelFromJson(json);
 
-  factory UserInfoModel.fromEntity(UserInfoEntity entity) => UserInfoMapper.toModel(entity);
+  factory UserInfoModel.fromEntity(UserInfoEntity entity) => UserInfoMapper.fromEntity(entity);
 
   factory UserInfoModel.fromUser(User user) => UserInfoMapper.fromUser(user);
 
   UserInfoEntity toEntity() => UserInfoMapper.toEntity(this);
+}
+
+List<FollowingModel<String>> _followingsFromJson(List<dynamic> json) {
+  return json.map((e) => FollowingModel<String>.fromJson(e, (p0) => p0 as String)).toList();
+}
+
+List<dynamic> _followingsToJson(List<FollowingModel<String>> followings) {
+  return followings.map((e) => e.toJson((p0) => p0)).toList();
 }
 
 // 추가 메서드 정의
@@ -79,7 +90,6 @@ extension UserInfoModelX on UserInfoModel {
       phone: updateData.phone,
       fax: updateData.fax,
       followings: updateData.followings,
-      favorites: updateData.favorites,
       external: updateData.external,
       lastUpdate: updateData.lastUpdate,
     );

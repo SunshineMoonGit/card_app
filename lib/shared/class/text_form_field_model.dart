@@ -1,8 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:card_app/config/app/app_enum.dart';
 import 'package:card_app/shared/class/controller_manager.dart';
 import 'package:card_app/shared/functions/validator/ss_validator.dart';
 

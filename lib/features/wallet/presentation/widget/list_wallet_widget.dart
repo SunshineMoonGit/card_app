@@ -3,6 +3,7 @@ import 'package:card_app/config/ui/app_dimensions.dart';
 import 'package:card_app/config/ui/theme_extension.dart';
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
 import 'package:card_app/features/auth/presentation/screens/auth_user_info_screen.dart';
+import 'package:card_app/features/wallet/domain/entity/following_entity.dart';
 import 'package:card_app/shared/extensions/build_context_extensions.dart';
 import 'package:card_app/shared/widgets/ss_image_file_widget.dart';
 import 'package:card_app/shared/widgets/ss_text.dart';
@@ -12,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class ListWalletWidget extends StatelessWidget {
-  final List<UserInfoEntity> followings;
+  final List<FollowingEntity<UserInfoEntity>> followings;
 
   const ListWalletWidget({
     super.key,
@@ -47,7 +48,7 @@ class ListWalletWidget extends StatelessWidget {
                   height: cardHeight,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(Dimensions.ssBorderRadiusSmall),
-                    child: SsImageFileWidget(imagePath: followings[index].cardImage),
+                    child: SsImageFileWidget(imagePath: followings[index].user.cardImage),
                   ),
                 ),
                 Dimensions.ssHorizontalSpaceLarge,
@@ -55,12 +56,12 @@ class ListWalletWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SsText(
-                      title: followings[index].name,
+                      title: followings[index].user.name,
                       style: context.textTheme.bodyLarge!,
                       color: context.colorScheme.onBackground,
                     ),
                     SsText(
-                      title: '${followings[index].company} ',
+                      title: '${followings[index].user.company} ',
                       style: context.textTheme.bodySmall!,
                       color: context.colorScheme.onBackground,
                     ),

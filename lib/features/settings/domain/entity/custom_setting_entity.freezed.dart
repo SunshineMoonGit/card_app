@@ -23,6 +23,7 @@ mixin _$CustomSettingEntity {
   bool get darkMode => throw _privateConstructorUsedError;
   String? get language => throw _privateConstructorUsedError;
   bool get notificationsEnabled => throw _privateConstructorUsedError;
+  List<int> get recent => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,11 @@ abstract class $CustomSettingEntityCopyWith<$Res> {
           CustomSettingEntity value, $Res Function(CustomSettingEntity) then) =
       _$CustomSettingEntityCopyWithImpl<$Res, CustomSettingEntity>;
   @useResult
-  $Res call({bool darkMode, String? language, bool notificationsEnabled});
+  $Res call(
+      {bool darkMode,
+      String? language,
+      bool notificationsEnabled,
+      List<int> recent});
 }
 
 /// @nodoc
@@ -55,6 +60,7 @@ class _$CustomSettingEntityCopyWithImpl<$Res, $Val extends CustomSettingEntity>
     Object? darkMode = null,
     Object? language = freezed,
     Object? notificationsEnabled = null,
+    Object? recent = null,
   }) {
     return _then(_value.copyWith(
       darkMode: null == darkMode
@@ -69,6 +75,10 @@ class _$CustomSettingEntityCopyWithImpl<$Res, $Val extends CustomSettingEntity>
           ? _value.notificationsEnabled
           : notificationsEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      recent: null == recent
+          ? _value.recent
+          : recent // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 }
@@ -81,7 +91,11 @@ abstract class _$$CustomSettingEntityImplCopyWith<$Res>
       __$$CustomSettingEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool darkMode, String? language, bool notificationsEnabled});
+  $Res call(
+      {bool darkMode,
+      String? language,
+      bool notificationsEnabled,
+      List<int> recent});
 }
 
 /// @nodoc
@@ -98,6 +112,7 @@ class __$$CustomSettingEntityImplCopyWithImpl<$Res>
     Object? darkMode = null,
     Object? language = freezed,
     Object? notificationsEnabled = null,
+    Object? recent = null,
   }) {
     return _then(_$CustomSettingEntityImpl(
       darkMode: null == darkMode
@@ -112,6 +127,10 @@ class __$$CustomSettingEntityImplCopyWithImpl<$Res>
           ? _value.notificationsEnabled
           : notificationsEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      recent: null == recent
+          ? _value._recent
+          : recent // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -120,23 +139,35 @@ class __$$CustomSettingEntityImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CustomSettingEntityImpl implements _CustomSettingEntity {
   _$CustomSettingEntityImpl(
-      {required this.darkMode,
+      {this.darkMode = false,
       this.language,
-      required this.notificationsEnabled});
+      this.notificationsEnabled = true,
+      final List<int> recent = const []})
+      : _recent = recent;
 
   factory _$CustomSettingEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$CustomSettingEntityImplFromJson(json);
 
   @override
+  @JsonKey()
   final bool darkMode;
   @override
   final String? language;
   @override
+  @JsonKey()
   final bool notificationsEnabled;
+  final List<int> _recent;
+  @override
+  @JsonKey()
+  List<int> get recent {
+    if (_recent is EqualUnmodifiableListView) return _recent;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_recent);
+  }
 
   @override
   String toString() {
-    return 'CustomSettingEntity(darkMode: $darkMode, language: $language, notificationsEnabled: $notificationsEnabled)';
+    return 'CustomSettingEntity(darkMode: $darkMode, language: $language, notificationsEnabled: $notificationsEnabled, recent: $recent)';
   }
 
   @override
@@ -149,13 +180,14 @@ class _$CustomSettingEntityImpl implements _CustomSettingEntity {
             (identical(other.language, language) ||
                 other.language == language) &&
             (identical(other.notificationsEnabled, notificationsEnabled) ||
-                other.notificationsEnabled == notificationsEnabled));
+                other.notificationsEnabled == notificationsEnabled) &&
+            const DeepCollectionEquality().equals(other._recent, _recent));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, darkMode, language, notificationsEnabled);
+  int get hashCode => Object.hash(runtimeType, darkMode, language,
+      notificationsEnabled, const DeepCollectionEquality().hash(_recent));
 
   @JsonKey(ignore: true)
   @override
@@ -174,9 +206,10 @@ class _$CustomSettingEntityImpl implements _CustomSettingEntity {
 
 abstract class _CustomSettingEntity implements CustomSettingEntity {
   factory _CustomSettingEntity(
-      {required final bool darkMode,
+      {final bool darkMode,
       final String? language,
-      required final bool notificationsEnabled}) = _$CustomSettingEntityImpl;
+      final bool notificationsEnabled,
+      final List<int> recent}) = _$CustomSettingEntityImpl;
 
   factory _CustomSettingEntity.fromJson(Map<String, dynamic> json) =
       _$CustomSettingEntityImpl.fromJson;
@@ -187,6 +220,8 @@ abstract class _CustomSettingEntity implements CustomSettingEntity {
   String? get language;
   @override
   bool get notificationsEnabled;
+  @override
+  List<int> get recent;
   @override
   @JsonKey(ignore: true)
   _$$CustomSettingEntityImplCopyWith<_$CustomSettingEntityImpl> get copyWith =>

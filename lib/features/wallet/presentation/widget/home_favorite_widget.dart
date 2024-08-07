@@ -1,7 +1,6 @@
 import 'package:card_app/config/ui/app_dimensions.dart';
 import 'package:card_app/config/ui/theme_extension.dart';
 import 'package:card_app/features/auth/domain/entity/user_info_entity.dart';
-import 'package:card_app/features/wallet/presentation/provider/wallet_provider.dart';
 import 'package:card_app/shared/extensions/build_context_extensions.dart';
 import 'package:card_app/shared/widgets/ss_text.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,8 @@ class HomeFavoritesWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<UserInfoEntity> userInfoList = ref.watch(walletProvider).favorites;
+    // final List<UserInfoEntity> userInfoList = ref.watch(walletProvider).favorites;
+    final List<UserInfoEntity> userInfoList = [];
 
     return SliverToBoxAdapter(
       child: Column(

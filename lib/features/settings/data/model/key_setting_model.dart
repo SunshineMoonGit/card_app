@@ -19,7 +19,7 @@ class KeySettingModel with _$KeySettingModel {
 
   factory KeySettingModel.fromJson(Map<String, dynamic> json) => _$KeySettingModelFromJson(json);
 
-  factory KeySettingModel.fromEntity(KeySettingEntity entity) => KeySettingMapper.toModel(entity);
+  factory KeySettingModel.fromEntity(KeySettingEntity entity) => KeySettingMapper.fromEntity(entity);
 
   KeySettingEntity toEntity() => KeySettingMapper.toEntity(this);
 

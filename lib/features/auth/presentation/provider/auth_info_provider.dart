@@ -5,16 +5,11 @@ import 'package:card_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:card_app/features/auth/domain/use_case/auth_network_use_case.dart';
 import 'package:card_app/features/auth/presentation/provider/auth_state_provider.dart';
 import 'package:card_app/features/settings/data/model/key_setting_model.dart';
-import 'package:card_app/features/settings/domain/entity/custom_setting_entity.dart';
 import 'package:card_app/features/settings/domain/entity/key_setting_entity.dart';
-import 'package:card_app/features/settings/presentation/provider/custom_setting_provider.dart';
 import 'package:card_app/features/settings/presentation/provider/key_setting_provider.dart';
 import 'package:card_app/features/wallet/presentation/provider/error_provider.dart';
 import 'package:card_app/shared/class/result_model/result.dart';
 import 'package:card_app/shared/functions/hive/ss_hive.dart';
-import 'package:card_app/shared/functions/ss_print.dart';
-import 'package:card_app/shared/widgets/notification/ss_failure_notification.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthInfoProviderNotifier extends StateNotifier<UserInfoEntity> {
@@ -79,6 +74,7 @@ class AuthInfoProviderNotifier extends StateNotifier<UserInfoEntity> {
     result.when(
       success: (value) {
         state = value;
+        ref.read(authStateProvider.notifier).change(AuthState.authenticated);
       },
       failure: (message) {
         ref.read(errorProvider.notifier).update(message);

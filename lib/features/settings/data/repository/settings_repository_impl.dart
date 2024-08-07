@@ -4,8 +4,6 @@ import 'package:card_app/features/settings/data/source/settings/local/settings_d
 import 'package:card_app/features/settings/domain/entity/custom_setting_entity.dart';
 import 'package:card_app/features/settings/domain/entity/key_setting_entity.dart';
 import 'package:card_app/features/settings/domain/repository/settings_repository.dart';
-import 'package:card_app/generated/intl/messages_en.dart';
-import 'package:card_app/shared/class/result_model/result.dart';
 
 class SettingsRepositoryImpl extends SettingsRepository {
   final SettingsDataSourceLocal dataSource;

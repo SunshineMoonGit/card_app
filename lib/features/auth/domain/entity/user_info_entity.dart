@@ -1,4 +1,5 @@
 import 'package:card_app/config/app/app_enum.dart';
+import 'package:card_app/features/wallet/domain/entity/following_entity.dart';
 import 'package:card_app/shared/class/controller_manager.dart';
 import 'package:card_app/shared/class/ss_external_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -22,8 +23,7 @@ abstract class UserInfoEntity with _$UserInfoEntity {
     @Default('') String fax,
     @Default('') String lastUpdate,
     // ------ premium ------
-    @Default([]) List<String> followings,
-    @Default([]) List<String> favorites,
+    @Default([]) List<FollowingEntity<String>> followings,
     @Default([]) List<SsExternalModel> external,
   }) = _UserInfoEntity;
 
@@ -32,13 +32,21 @@ abstract class UserInfoEntity with _$UserInfoEntity {
 
   // 팔로잉 추가 메서드
   UserInfoEntity addFollowing(String userId) {
-    if (followings.contains(userId)) return this;
-    return copyWith(followings: [...followings, userId]);
+    // userId를 가진 FollowingEntity가 이미 존재하는지 확인
+    if (followings.any((following) => following.user == userId)) {
+      return this;
+    }
+
+    // 새로운 FollowingEntity 생성 및 리스트에 추가
+    final newFollowing = FollowingEntity<String>(user: userId);
+    return copyWith(followings: [...followings, newFollowing]);
   }
 
   // 팔로잉 제거 메서드
   UserInfoEntity removeFollowing(String userId) {
-    return copyWith(followings: followings.where((id) => id != userId).toList());
+    return copyWith(
+      followings: followings.where((following) => following.user != userId).toList(),
+    );
   }
 
   static UserInfoEntity fromController(NewCardController controller) {
